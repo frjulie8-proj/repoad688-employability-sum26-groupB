@@ -1,0 +1,86 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About the Team",
+    "section": "",
+    "text": "Name\nGitHub\n\n\n\n\nJulie Ngo Tran\n@frjulie8proj\n\n\nAlina Chen\n@alinayanxi\n\n\nYifan Cui\n@cyifan25dot\n\n\nZhiyang Guo\n@guozyang6\n\n\nAntara Sudhir\n@sudhirantara"
+  },
+  {
+    "objectID": "about.html#group-b-team-members",
+    "href": "about.html#group-b-team-members",
+    "title": "About the Team",
+    "section": "",
+    "text": "Name\nGitHub\n\n\n\n\nJulie Ngo Tran\n@frjulie8proj\n\n\nAlina Chen\n@alinayanxi\n\n\nYifan Cui\n@cyifan25dot\n\n\nZhiyang Guo\n@guozyang6\n\n\nAntara Sudhir\n@sudhirantara"
+  },
+  {
+    "objectID": "about.html#about-this-project",
+    "href": "about.html#about-this-project",
+    "title": "About the Team",
+    "section": "About This Project",
+    "text": "About This Project\nThis research is part of AD688 at Boston University, analyzing gender disparities in hiring and political influence on employment patterns using 2024 Lightcast job market data."
+  },
+  {
+    "objectID": "etl/etl_pipeline.html",
+    "href": "etl/etl_pipeline.html",
+    "title": "ETL Pipeline — Master Orchestrator",
+    "section": "",
+    "text": "Runs the full extract → transform → load pipeline. Add new datasets by repeating the three-step pattern below.\n\nimport subprocess, sys# Run each ETL step as a notebook so outputs are preservedsubprocess.run([sys.executable, \"-m\", \"jupyter\", \"nbconvert\", \"--to\", \"notebook\",                \"--execute\", \"01_extract.ipynb\", \"--output\", \"01_extract.ipynb\"], check=True)subprocess.run([sys.executable, \"-m\", \"jupyter\", \"nbconvert\", \"--to\", \"notebook\",                \"--execute\", \"02_transform.ipynb\", \"--output\", \"02_transform.ipynb\"], check=True)subprocess.run([sys.executable, \"-m\", \"jupyter\", \"nbconvert\", \"--to\", \"notebook\",                \"--execute\", \"03_load.ipynb\", \"--output\", \"03_load.ipynb\"], check=True)print(\"Pipeline complete.\")"
+  },
+  {
+    "objectID": "etl/01_extract.html",
+    "href": "etl/01_extract.html",
+    "title": "ETL Step 1 — Extract",
+    "section": "",
+    "text": "Defines extract(filepath) — loads a CSV, prints a full inspection report, and returns a DataFrame.\nimport pandas as pd\n\ndef extract(filepath):\n    df = pd.read_csv(filepath, low_memory=False)\n\n    pd.set_option('display.max_columns', None)\n\n    print(\"Shape:\", df.shape)\n    print(\"\\nColumns:\", df.columns.tolist())\n    print(\"\\nDtypes:\\n\", df.dtypes)\n    print(\"\\nHead:\")\n    display(df.head(5))\n    print(\"\\nTail:\")\n    display(df.tail(5))\n    print(\"\\nMissing values:\\n\", df.isnull().sum())\n    print(\"\\nBasic stats:\")\n    display(df.describe())\n\n    return df"
+  },
+  {
+    "objectID": "etl/01_extract.html#run-extract-on-lightcast-dataset",
+    "href": "etl/01_extract.html#run-extract-on-lightcast-dataset",
+    "title": "ETL Step 1 — Extract",
+    "section": "Run extract on Lightcast dataset",
+    "text": "Run extract on Lightcast dataset\n\ndf = extract(\"../data/raw/lightcast_2024.csv\")"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Gender Disparities in Hiring & Political Influence",
+    "section": "",
+    "text": "This project examines gender based disparities in hiring patterns across industries and explores how political influence measured by state political lean (red vs. blue) shapes employment outcomes for men and women in 2024.\nUsing the Lightcast dataset as our baseline, we apply a structured ETL pipeline to extract, clean, and analyze real world job market data, publishing our findings as an evolving research portfolio."
+  },
+  {
+    "objectID": "index.html#overview",
+    "href": "index.html#overview",
+    "title": "Gender Disparities in Hiring & Political Influence",
+    "section": "",
+    "text": "This project examines gender based disparities in hiring patterns across industries and explores how political influence measured by state political lean (red vs. blue) shapes employment outcomes for men and women in 2024.\nUsing the Lightcast dataset as our baseline, we apply a structured ETL pipeline to extract, clean, and analyze real world job market data, publishing our findings as an evolving research portfolio."
+  },
+  {
+    "objectID": "index.html#research-questions",
+    "href": "index.html#research-questions",
+    "title": "Gender Disparities in Hiring & Political Influence",
+    "section": "Research Questions",
+    "text": "Research Questions\n\nHow do hiring patterns differ for men vs. women across industries?\nDo gender based employment disparities vary between red and blue states?"
+  },
+  {
+    "objectID": "index.html#project-status",
+    "href": "index.html#project-status",
+    "title": "Gender Disparities in Hiring & Political Influence",
+    "section": "Project Status",
+    "text": "Project Status\n\nThis site is updated weekly as analysis progresses. Check back for new findings, visualizations, and insights.\n\n\n\n\nWeek\nMilestone\n\n\n\n\n1\nRepo setup, site initialized, ETL pipeline designed\n\n\n2\nData extraction, column selection\n\n\n…\n…"
+  },
+  {
+    "objectID": "etl/03_load.html",
+    "href": "etl/03_load.html",
+    "title": "ETL Step 3 — Load",
+    "section": "",
+    "text": "Defines load(df, output_path) — saves the cleaned DataFrame to data/processed/ as a CSV.\n\nimport os\n\ndef load(df, output_path):\n    os.makedirs(os.path.dirname(output_path), exist_ok=True)\n    df.to_csv(output_path, index=False)\n    print(f\"Saved {len(df)} rows to {output_path}\")"
+  },
+  {
+    "objectID": "etl/02_transform.html",
+    "href": "etl/02_transform.html",
+    "title": "ETL Step 2 — Transform",
+    "section": "",
+    "text": "Defines transform(df) — selects relevant columns, cleans nulls, standardizes types, and merges red/blue state classification. Returns df_clean.\n\nimport pandas as pd\n\ndef transform(df):\n    # Select columns relevant to gender & political analysis\n    keep_cols = [\n        'TITLE_NAME',\n        'STATE', 'STATE_NAME',\n        'NAICS2_NAME',\n        'SALARY_FROM', 'SALARY_TO',\n        'EMPLOYMENT_TYPE_NAME',\n        'REMOTE_TYPE_NAME',\n        'SOC_2021_2', 'SOC_2021_2_NAME',\n        'MIN_EDULEVELS_NAME',\n        'MIN_YEARS_EXPERIENCE'\n    ]\n    df_clean = df[keep_cols].copy()\n\n    # Drop rows missing state (needed for red/blue join)\n    df_clean = df_clean.dropna(subset=['STATE'])\n\n    # Standardize state to uppercase string\n    df_clean['STATE'] = df_clean['STATE'].astype(str).str.upper().str.strip()\n\n    print(\"Shape after transform:\", df_clean.shape)\n    print(\"\\nMissing values:\\n\", df_clean.isnull().sum())\n\n    return df_clean"
+  }
+]
