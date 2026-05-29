@@ -24,6 +24,7 @@ publishing our findings as an evolving research portfolio.
 ## Project Status
 
 > This site is updated weekly as analysis progresses.
+> Base DB Lightcast is not sufficent for analysis. Researching for complementary dataset
 > Check back for new findings, visualizations, and insights.
 
 | Week | Milestone |
