@@ -6,3 +6,4 @@ usa_00001.csv.gz
 _site/
 *.deb
 
+venv/
