@@ -1,0 +1,20 @@
+---
+title: "About the Team"
+format: html
+---
+
+## Group B Team Members
+
+| Name | GitHub |
+|------|--------|
+| Julie Ngo Tran | [@frjulie8proj](https://github.com/frjulie8-proj) |
+| Alina Chen | [@alinayanxi](https://github.com/alinayanxi) |
+| Yifan Cui | [@cyifan25dot](https://github.com/cyifan25-dot) |
+| Zhiyang Guo | [@guozyang6](https://github.com/guozyang-6) |
+| Antara Sudhir | [@sudhirantara](https://github.com/sudhir-antara) |
+
+## About This Project
+
+This research is part of AD688 at Boston University, analyzing
+gender disparities in hiring and political influence on employment
+patterns using 2024 Lightcast job market data.

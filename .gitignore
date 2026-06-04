@@ -1,6 +1,8 @@
 lightcast dataset
-
 data/raw/lightcast_job_postings.csv
 usa_00001.csv.gz
-
+/.quarto/
+**/*.quarto_ipynb
+_site/
+*.deb
 
