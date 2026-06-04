@@ -1,3 +1,4 @@
+
 lightcast dataset
 data/raw/lightcast_job_postings.csv
 usa_00001.csv.gz
@@ -7,3 +8,8 @@ _site/
 *.deb
 
 venv/
+
+data/processed/person.csv
+data/processed/employment.csv
+data/processed/employed_only.csv
+
