@@ -2262,6 +2262,235 @@ Basic stats:</code></pre>
 </div>
 </div>
 </div>
+<div id="da6301ba" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df.columns[<span class="dv">26</span>:<span class="dv">53</span>].tolist()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>['EMPLOYMENT_TYPE',
+ 'EMPLOYMENT_TYPE_NAME',
+ 'MIN_YEARS_EXPERIENCE',
+ 'MAX_YEARS_EXPERIENCE',
+ 'IS_INTERNSHIP',
+ 'SALARY',
+ 'REMOTE_TYPE',
+ 'REMOTE_TYPE_NAME',
+ 'ORIGINAL_PAY_PERIOD',
+ 'SALARY_TO',
+ 'SALARY_FROM',
+ 'LOCATION',
+ 'CITY',
+ 'CITY_NAME',
+ 'COUNTY',
+ 'COUNTY_NAME',
+ 'MSA',
+ 'MSA_NAME',
+ 'STATE',
+ 'STATE_NAME',
+ 'COUNTY_OUTGOING',
+ 'COUNTY_NAME_OUTGOING',
+ 'COUNTY_INCOMING',
+ 'COUNTY_NAME_INCOMING',
+ 'MSA_OUTGOING',
+ 'MSA_NAME_OUTGOING',
+ 'MSA_INCOMING']</code></pre>
+</div>
+</div>
+<div id="76944b03" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'display.max_columns'</span>, <span class="va">None</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df.iloc[:, <span class="dv">26</span>:<span class="dv">53</span>].head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">EMPLOYMENT_TYPE</th>
+<th data-quarto-table-cell-role="th">EMPLOYMENT_TYPE_NAME</th>
+<th data-quarto-table-cell-role="th">MIN_YEARS_EXPERIENCE</th>
+<th data-quarto-table-cell-role="th">MAX_YEARS_EXPERIENCE</th>
+<th data-quarto-table-cell-role="th">IS_INTERNSHIP</th>
+<th data-quarto-table-cell-role="th">SALARY</th>
+<th data-quarto-table-cell-role="th">REMOTE_TYPE</th>
+<th data-quarto-table-cell-role="th">REMOTE_TYPE_NAME</th>
+<th data-quarto-table-cell-role="th">ORIGINAL_PAY_PERIOD</th>
+<th data-quarto-table-cell-role="th">SALARY_TO</th>
+<th data-quarto-table-cell-role="th">SALARY_FROM</th>
+<th data-quarto-table-cell-role="th">LOCATION</th>
+<th data-quarto-table-cell-role="th">CITY</th>
+<th data-quarto-table-cell-role="th">CITY_NAME</th>
+<th data-quarto-table-cell-role="th">COUNTY</th>
+<th data-quarto-table-cell-role="th">COUNTY_NAME</th>
+<th data-quarto-table-cell-role="th">MSA</th>
+<th data-quarto-table-cell-role="th">MSA_NAME</th>
+<th data-quarto-table-cell-role="th">STATE</th>
+<th data-quarto-table-cell-role="th">STATE_NAME</th>
+<th data-quarto-table-cell-role="th">COUNTY_OUTGOING</th>
+<th data-quarto-table-cell-role="th">COUNTY_NAME_OUTGOING</th>
+<th data-quarto-table-cell-role="th">COUNTY_INCOMING</th>
+<th data-quarto-table-cell-role="th">COUNTY_NAME_INCOMING</th>
+<th data-quarto-table-cell-role="th">MSA_OUTGOING</th>
+<th data-quarto-table-cell-role="th">MSA_NAME_OUTGOING</th>
+<th data-quarto-table-cell-role="th">MSA_INCOMING</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>1.0</td>
+<td>Full-time (&gt; 32 hours)</td>
+<td>2.0</td>
+<td>2.0</td>
+<td>False</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>[None]</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>{\n&nbsp;&nbsp;"lat": 33.20763,\n&nbsp;&nbsp;"lon": -92.6662674\n}</td>
+<td>RWwgRG9yYWRvLCBBUg==</td>
+<td>El Dorado, AR</td>
+<td>5139.0</td>
+<td>Union, AR</td>
+<td>20980.0</td>
+<td>El Dorado, AR</td>
+<td>5.0</td>
+<td>Arkansas</td>
+<td>5139.0</td>
+<td>Union, AR</td>
+<td>5139.0</td>
+<td>Union, AR</td>
+<td>20980.0</td>
+<td>El Dorado, AR</td>
+<td>20980.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1.0</td>
+<td>Full-time (&gt; 32 hours)</td>
+<td>3.0</td>
+<td>3.0</td>
+<td>False</td>
+<td>NaN</td>
+<td>1.0</td>
+<td>Remote</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>{\n&nbsp;&nbsp;"lat": 44.3106241,\n&nbsp;&nbsp;"lon": -69.7794897\n}</td>
+<td>QXVndXN0YSwgTUU=</td>
+<td>Augusta, ME</td>
+<td>23011.0</td>
+<td>Kennebec, ME</td>
+<td>12300.0</td>
+<td>Augusta-Waterville, ME</td>
+<td>23.0</td>
+<td>Maine</td>
+<td>23011.0</td>
+<td>Kennebec, ME</td>
+<td>23011.0</td>
+<td>Kennebec, ME</td>
+<td>12300.0</td>
+<td>Augusta-Waterville, ME</td>
+<td>12300.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>1.0</td>
+<td>Full-time (&gt; 32 hours)</td>
+<td>5.0</td>
+<td>NaN</td>
+<td>False</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>[None]</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>{\n&nbsp;&nbsp;"lat": 32.7766642,\n&nbsp;&nbsp;"lon": -96.7969879\n}</td>
+<td>RGFsbGFzLCBUWA==</td>
+<td>Dallas, TX</td>
+<td>48113.0</td>
+<td>Dallas, TX</td>
+<td>19100.0</td>
+<td>Dallas-Fort Worth-Arlington, TX</td>
+<td>48.0</td>
+<td>Texas</td>
+<td>48113.0</td>
+<td>Dallas, TX</td>
+<td>48113.0</td>
+<td>Dallas, TX</td>
+<td>19100.0</td>
+<td>Dallas-Fort Worth-Arlington, TX</td>
+<td>19100.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>1.0</td>
+<td>Full-time (&gt; 32 hours)</td>
+<td>3.0</td>
+<td>NaN</td>
+<td>False</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>[None]</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>{\n&nbsp;&nbsp;"lat": 33.4483771,\n&nbsp;&nbsp;"lon": -112.0740373\n}</td>
+<td>UGhvZW5peCwgQVo=</td>
+<td>Phoenix, AZ</td>
+<td>4013.0</td>
+<td>Maricopa, AZ</td>
+<td>38060.0</td>
+<td>Phoenix-Mesa-Chandler, AZ</td>
+<td>4.0</td>
+<td>Arizona</td>
+<td>4013.0</td>
+<td>Maricopa, AZ</td>
+<td>4013.0</td>
+<td>Maricopa, AZ</td>
+<td>38060.0</td>
+<td>Phoenix-Mesa-Chandler, AZ</td>
+<td>38060.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>3.0</td>
+<td>Part-time / full-time</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>False</td>
+<td>92500.0</td>
+<td>0.0</td>
+<td>[None]</td>
+<td>year</td>
+<td>150000.0</td>
+<td>35000.0</td>
+<td>{\n&nbsp;&nbsp;"lat": 37.6392595,\n&nbsp;&nbsp;"lon": -120.9970014\n}</td>
+<td>TW9kZXN0bywgQ0E=</td>
+<td>Modesto, CA</td>
+<td>6099.0</td>
+<td>Stanislaus, CA</td>
+<td>33700.0</td>
+<td>Modesto, CA</td>
+<td>6.0</td>
+<td>California</td>
+<td>6099.0</td>
+<td>Stanislaus, CA</td>
+<td>6099.0</td>
+<td>Stanislaus, CA</td>
+<td>33700.0</td>
+<td>Modesto, CA</td>
+<td>33700.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 
 
 </section>
