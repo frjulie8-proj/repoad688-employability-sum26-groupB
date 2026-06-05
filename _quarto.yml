@@ -2,6 +2,7 @@ project:
   type: website
 
 website:
+  site-url: https://frjulie8-proj.github.io/repoad688-employability-sum26-groupB/
   title: "Gender Disparities in Hiring & Political Influence"
   navbar:
     left:
