@@ -1,24 +1,13 @@
-import pandas as pd
+import pan
+das as pd
 import os
 
-# Paths
-INPUT_FILE  = os.path.expanduser("~/datasets/usa_00001.csv.gz")
-OUTPUT_DIR  = os.path.expanduser("~/repoad688-employability-sum26-groupB/data/processed")
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+# ── Constants ──────────────────────────────────────────────────────────────
+INPUT_FILE = os.path.expanduser("~/datasets/usa_00001.csv.gz")
+OUTPUT_DIR = os.path.expanduser("~/repoad688-employability-sum26-groupB/data/processed")
 
-# Load raw data
-print("Loading IPUMS data")
-df = pd.read_csv(INPUT_FILE, compression="gzip")
-print(f"Loaded {len(df):,} rows and {len(df.columns)} columns.")
-
-# Clean data
-df["INCWAGE"] = df["INCWAGE"].replace(999999, None)
-df = df[df["GQ"].isin([1, 2])]
-
-# Table 1: Household
-print("Creating Household table")
-household_df = df[["SERIAL", "STATEFIP", "GQ", "HHWT"]].drop_duplicates(subset=["SERIAL"])
-state_map = {
+# ── Lookup Maps ────────────────────────────────────────────────────────────
+STATE_MAP = {
     1:"Alabama", 2:"Alaska", 4:"Arizona", 5:"Arkansas", 6:"California",
     8:"Colorado", 9:"Connecticut", 10:"Delaware", 11:"District of Columbia",
     12:"Florida", 13:"Georgia", 15:"Hawaii", 16:"Idaho", 17:"Illinois",
@@ -32,57 +21,123 @@ state_map = {
     47:"Tennessee", 48:"Texas", 49:"Utah", 50:"Vermont", 51:"Virginia",
     53:"Washington", 54:"West Virginia", 55:"Wisconsin", 56:"Wyoming"
 }
-household_df = household_df.copy()
-household_df["STATE_NAME"] = household_df["STATEFIP"].map(state_map)
-household_df.to_csv(f"{OUTPUT_DIR}/household.csv", index=False)
-print(f"  Saved household.csv ({len(household_df):,} rows)")
 
-# Table 2: Person
-print("Creating Person table")
-sex_map = {1: "Male", 2: "Female"}
-race_map = {
+SEX_MAP = {1: "Male", 2: "Female"}
+
+RACE_MAP = {
     1: "White", 2: "Black", 3: "American Indian",
     4: "Chinese", 5: "Japanese", 6: "Other Asian",
     7: "Other", 8: "Two races", 9: "Three or more races"
 }
-person_df = df[["SERIAL", "PERNUM", "SEX", "AGE", "RACE", "RACED", "PERWT"]].copy()
-person_df["SEX_LABEL"]  = person_df["SEX"].map(sex_map)
-person_df["RACE_LABEL"] = person_df["RACE"].map(race_map)
-person_df.to_csv(f"{OUTPUT_DIR}/person.csv", index=False)
-print(f"  Saved person.csv ({len(person_df):,} rows)")
 
-# Table 3: Employment
-print("Creating Employment table")
-empstat_map = {1: "Employed", 2: "Unemployed", 3: "Not in labor force"}
-employment_df = df[["SERIAL", "PERNUM", "EMPSTAT", "EMPSTATD", "OCC", "IND", "INCWAGE"]].copy()
-employment_df["EMPSTAT_LABEL"] = employment_df["EMPSTAT"].map(empstat_map)
-employment_df.to_csv(f"{OUTPUT_DIR}/employment.csv", index=False)
-print(f"  Saved employment.csv ({len(employment_df):,} rows)")
+EMPSTAT_MAP = {1: "Employed", 2: "Unemployed", 3: "Not in labor force"}
 
-# Table 4: Employed Only (for gender analysis)
-print("Creating Employed_Only table")
-employed_df = df[df["EMPSTAT"] == 1][
-    ["SERIAL", "PERNUM", "SEX", "AGE", "RACE", "STATEFIP", "OCC", "IND", "INCWAGE", "PERWT"]
-].copy()
-employed_df["SEX_LABEL"]  = employed_df["SEX"].map(sex_map)
-employed_df["RACE_LABEL"] = employed_df["RACE"].map(race_map)
-employed_df["STATE_NAME"] = employed_df["STATEFIP"].map(state_map)
-employed_df = employed_df[employed_df["INCWAGE"].notna()]
-employed_df.to_csv(f"{OUTPUT_DIR}/employed_only.csv", index=False)
-print(f"  Saved employed_only.csv ({len(employed_df):,} rows)")
 
-print("\nAll tables saved to:", OUTPUT_DIR)
-print("Done!")
+# ── Helper Functions ───────────────────────────────────────────────────────
+def load_data(input_file, compression="gzip"):
+    """Load raw data from a file."""
+    print(f"Loading data from {input_file}...")
+    df = pd.read_csv(input_file, compression=compression)
+    print(f"  Loaded {len(df):,} rows and {len(df.columns)} columns.")
+    return df
 
-# Table 5: Occupation Lookup
-print("Creating Occupation lookup table")
-occ_df = employed_df[["OCC"]].drop_duplicates().copy()
-occ_df.to_csv(f"{OUTPUT_DIR}/occupation_codes.csv", index=False)
-print(f"  Saved occupation_codes.csv ({len(occ_df):,} rows)")
 
-# Table 6: Industry Lookup
-print("Creating Industry lookup table")
-ind_df = employed_df[["IND"]].drop_duplicates().copy()
-ind_df.to_csv(f"{OUTPUT_DIR}/industry_codes.csv", index=False)
-print(f"  Saved industry_codes.csv ({len(ind_df):,} rows)")
+def clean_data(df):
+    """Apply general cleaning steps to the raw dataframe."""
+    print("Cleaning data...")
+    df["INCWAGE"] = df["INCWAGE"].replace(999999, None)
+    df = df[df["GQ"].isin([1, 2])]
+    print(f"  Cleaned data: {len(df):,} rows remaining.")
+    return df
 
+
+def save_table(df, output_dir, filename):
+    """Save a dataframe to CSV and print confirmation."""
+    os.makedirs(output_dir, exist_ok=True)
+    filepath = f"{output_dir}/{filename}"
+    df.to_csv(filepath, index=False)
+    print(f"  Saved {filename} ({len(df):,} rows)")
+    return filepath
+
+
+def apply_labels(df, col, label_map, label_col=None):
+    """Map a column's codes to human-readable labels."""
+    if label_col is None:
+        label_col = f"{col}_LABEL"
+    df[label_col] = df[col].map(label_map)
+    return df
+
+
+# ── Table Functions ────────────────────────────────────────────────────────
+def create_household_table(df, output_dir):
+    """Create and save the Household table."""
+    print("Creating Household table...")
+    household_df = df[["SERIAL", "STATEFIP", "GQ", "HHWT"]].drop_duplicates(subset=["SERIAL"]).copy()
+    household_df = apply_labels(household_df, "STATEFIP", STATE_MAP, "STATE_NAME")
+    save_table(household_df, output_dir, "household.csv")
+    return household_df
+
+
+def create_person_table(df, output_dir):
+    """Create and save the Person table."""
+    print("Creating Person table...")
+    person_df = df[["SERIAL", "PERNUM", "SEX", "AGE", "RACE", "RACED", "PERWT"]].copy()
+    person_df = apply_labels(person_df, "SEX", SEX_MAP)
+    person_df = apply_labels(person_df, "RACE", RACE_MAP)
+    save_table(person_df, output_dir, "person.csv")
+    return person_df
+
+
+def create_employment_table(df, output_dir):
+    """Create and save the Employment table."""
+    print("Creating Employment table...")
+    employment_df = df[["SERIAL", "PERNUM", "EMPSTAT", "EMPSTATD", "OCC", "IND", "INCWAGE"]].copy()
+    employment_df = apply_labels(employment_df, "EMPSTAT", EMPSTAT_MAP)
+    save_table(employment_df, output_dir, "employment.csv")
+    return employment_df
+
+
+def create_employed_only_table(df, output_dir):
+    """Create and save the Employed Only table (for gender analysis)."""
+    print("Creating Employed Only table...")
+    employed_df = df[df["EMPSTAT"] == 1][
+        ["SERIAL", "PERNUM", "SEX", "AGE", "RACE", "STATEFIP", "OCC", "IND", "INCWAGE", "PERWT"]
+    ].copy()
+    employed_df = apply_labels(employed_df, "SEX", SEX_MAP)
+    employed_df = apply_labels(employed_df, "RACE", RACE_MAP)
+    employed_df = apply_labels(employed_df, "STATEFIP", STATE_MAP, "STATE_NAME")
+    employed_df = employed_df[employed_df["INCWAGE"].notna()]
+    save_table(employed_df, output_dir, "employed_only.csv")
+    return employed_df
+
+
+def create_lookup_table(df, col, output_dir, filename):
+    """Create and save a lookup table for a given column."""
+    print(f"Creating {col} lookup table...")
+    lookup_df = df[[col]].drop_duplicates().copy()
+    save_table(lookup_df, output_dir, filename)
+    return lookup_df
+
+
+# ── Main ───────────────────────────────────────────────────────────────────
+def main():
+    # Load and clean
+    df = load_data(INPUT_FILE)
+    df = clean_data(df)
+
+    # Create all tables
+    create_household_table(df, OUTPUT_DIR)
+    create_person_table(df, OUTPUT_DIR)
+    create_employment_table(df, OUTPUT_DIR)
+    employed_df = create_employed_only_table(df, OUTPUT_DIR)
+
+    # Lookup tables
+    create_lookup_table(employed_df, "OCC", OUTPUT_DIR, "occupation_codes.csv")
+    create_lookup_table(employed_df, "IND", OUTPUT_DIR, "industry_codes.csv")
+
+    print(f"\nAll tables saved to: {OUTPUT_DIR}")
+    print("Done!")
+
+
+if __name__ == "__main__":
+    main()
