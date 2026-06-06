@@ -1,5 +1,4 @@
-import pan
-das as pd
+import pandas as pd
 import os
 
 # ── Constants ──────────────────────────────────────────────────────────────
