@@ -1,0 +1,157 @@
+---
+title: "Skill Gap Analysis"
+format:
+  html:
+    theme: cosmo
+    toc: true
+execute:
+  echo: true
+  eval: true
+  code-fold: true
+---
+
+## Overview
+
+This section compares the skills required in IT job postings against the actual skills of our group members to identify knowledge gaps and areas for improvement.
+
+---
+
+## 3.1.1 Team Skill Levels
+
+Each team member rated their proficiency on a scale of 1-5:
+
+- `1 = Beginner`
+- `2 = Basic Knowledge`
+- `3 = Intermediate`
+- `4 = Advanced`
+- `5 = Expert`
+
+```{python}
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Team skill levels
+skills_data = {
+    "Name":               ["Antara", "Julie", "Yifan", "Zhiyang", "Alina"],
+    "Python":             [3, 0, 0, 0, 0],
+    "SQL":                [4, 0, 0, 0, 0],
+    "Machine Learning":   [2, 0, 0, 0, 0],
+    "AWS":                [2, 0, 0, 0, 0],
+    "Data Visualization": [4, 0, 0, 0, 0],
+    "Statistics":         [2, 0, 0, 0, 0],
+    "Big Data / Spark":   [2, 0, 0, 0, 0],
+    "Excel":              [4, 0, 0, 0, 0],
+    "Business Analytics": [4, 0, 0, 0, 0],
+}
+
+df_skills = pd.DataFrame(skills_data)
+df_skills.set_index("Name", inplace=True)
+df_skills
+```
+
+---
+
+## 3.1.2 Team Skill Heatmap
+
+```{python}
+plt.figure(figsize=(12, 6))
+sns.heatmap(
+    df_skills,
+    annot=True,
+    cmap="coolwarm",
+    linewidths=0.5,
+    vmin=0,
+    vmax=5,
+    fmt="d"
+)
+plt.title("Team Skill Levels Heatmap", fontsize=14)
+plt.xlabel("Skills")
+plt.ylabel("Team Members")
+plt.tight_layout()
+plt.savefig("figures/skill_heatmap.png", dpi=150, bbox_inches="tight")
+plt.show()
+```
+
+---
+
+## 3.1.3 Compare Team Skills to Industry Requirements
+
+```{python}
+from collections import Counter
+
+# Top skills extracted from Lightcast IT job postings
+top_skills = [
+    "Python", "SQL", "Machine Learning", "AWS",
+    "Data Visualization", "Statistics", "Big Data / Spark",
+    "Excel", "Business Analytics"
+]
+
+job_skill_counts = Counter(top_skills)
+
+# Add any missing skills with 0
+for skill in top_skills:
+    if skill not in df_skills.columns:
+        df_skills[skill] = 0
+
+# Team average vs industry demand
+team_avg = df_skills.mean()
+industry_demand = pd.Series({skill: 4 for skill in top_skills})
+
+gap_df = pd.DataFrame({
+    "Team Average": team_avg,
+    "Industry Expectation": industry_demand
+})
+
+gap_df["Gap"] = gap_df["Industry Expectation"] - gap_df["Team Average"]
+gap_df = gap_df.sort_values("Gap", ascending=False)
+gap_df
+```
+
+---
+
+## 3.1.4 Skill Gap Visualization
+
+```{python}
+plt.figure(figsize=(12, 6))
+gap_df[["Team Average", "Industry Expectation"]].plot(
+    kind="bar",
+    figsize=(12, 6),
+    color=["steelblue", "tomato"],
+    edgecolor="black"
+)
+plt.title("Team Skills vs Industry Expectations", fontsize=14)
+plt.xlabel("Skills")
+plt.ylabel("Proficiency Level (1-5)")
+plt.xticks(rotation=45, ha="right")
+plt.legend(["Team Average", "Industry Expectation"])
+plt.tight_layout()
+plt.savefig("figures/skill_gap_bar.png", dpi=150, bbox_inches="tight")
+plt.show()
+```
+
+---
+
+## 3.1.5 Improvement Plan
+
+Based on the skill gap analysis, here are the priority areas for each team member:
+
+| Team Member | Priority Skills to Learn | Recommended Resources |
+|---|---|---|
+| Antara | Machine Learning, Statistics, AWS | Coursera ML Course, AWS Training |
+| Julie | TBD | TBD |
+| Yifan | TBD | TBD |
+| Zhiyang | TBD | TBD |
+| Alina | TBD | TBD |
+
+### Team Collaboration Plan
+- **Antara** leads: Data sourcing,  Data cleaning, SQL, Business Analytics
+- **Julie** leads: TBD
+- **Yifan** leads: TBD
+- **Zhiyang** leads: TBD
+- **Alina** leads: TBD
+
+---
+
+
+
