@@ -5,43 +5,43 @@ title: "Exploratory Analysis"
 ## Overview
 
 Exploratory Data Analysis of the 2024 Lightcast job postings dataset.
-All charts are pre-rendered and saved to `figures/` — no raw data is loaded at render time.
+All charts are pre-rendered and saved to `assets/figures/` — no raw data is loaded at render time.
 
 ---
 
 ## Salary Distribution
 
-![Salary Distribution](figures/eda_salary_dist.png)
+![Salary Distribution](../assets/figures/eda_salary_dist.png)
 
 ---
 
 ## Top Industries by Job Postings
 
-![Top Industries](figures/eda_top_industries.png)
+![Top Industries](../assets/figures/eda_top_industries.png)
 
 ---
 
 ## Employment Type Breakdown
 
-![Employment Type](figures/eda_employment_type.png)
+![Employment Type](../assets/figures/eda_employment_type.png)
 
 ---
 
 ## Job Postings by State
 
-![Jobs by State](figures/eda_jobs_by_state.png)
+![Jobs by State](../assets/figures/eda_jobs_by_state.png)
 
 ---
 
 ## Remote vs On-Site Trends
 
-![Remote vs On-Site](figures/eda_remote_type.png)
+![Remote vs On-Site](../assets/figures/eda_remote_type.png)
 
 ---
 
 ## Education Level Requirements
 
-![Education Requirements](figures/eda_education.png)
+![Education Requirements](../assets/figures/eda_education.png)
 
 ---
 
