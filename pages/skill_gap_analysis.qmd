@@ -1,13 +1,7 @@
 ---
 title: "Skill Gap Analysis"
-format:
-  html:
-    theme: cosmo
-    toc: true
 execute:
-  echo: true
-  eval: true
-  code-fold: true
+  eval: false
 ---
 
 ## Overview
