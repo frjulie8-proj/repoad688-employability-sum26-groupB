@@ -8,144 +8,145 @@ execute:
 
 This section compares the skills required in IT job postings against the actual skills of our group members to identify knowledge gaps and areas for improvement.
 
+Proficiency scale: **1 = Beginner → 5 = Expert**
+
 ---
 
-## 3.1.1 Team Skill Levels
-
-Each team member rated their proficiency on a scale of 1-5:
-
-- `1 = Beginner`
-- `2 = Basic Knowledge`
-- `3 = Intermediate`
-- `4 = Advanced`
-- `5 = Expert`
+## Team Skill Levels
 
 ```{python}
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
+import plotly.express as px
+import plotly.graph_objects as go
+import os
 
-# Team skill levels
+# Shared Plotly theme — must match eda.qmd
+PLOTLY_THEME = dict(
+    template="plotly_white",
+    font=dict(family="Arial", size=13),
+    title_font=dict(size=16, color="#2c3e50"),
+    colorway=["#2c7bb6", "#d7191c", "#fdae61", "#1a9641"]
+)
+
+# TODO: Each teammate fills in their own row before final submission
 skills_data = {
-    "Name":               ["Antara", "Julie", "Yifan", "Zhiyang", "Alina"],
-    "Python":             [3, 0, 0, 0, 0],
-    "SQL":                [4, 0, 0, 0, 0],
-    "Machine Learning":   [2, 0, 0, 0, 0],
-    "AWS":                [2, 0, 0, 0, 0],
-    "Data Visualization": [4, 0, 0, 0, 0],
-    "Statistics":         [2, 0, 0, 0, 0],
-    "Big Data / Spark":   [2, 0, 0, 0, 0],
-    "Excel":              [4, 0, 0, 0, 0],
-    "Business Analytics": [4, 0, 0, 0, 0],
+    "Name":               ["Julie", "Yifan", "Zhiyang", "Alina", "Antara"],
+    "Python":             [3,       0,        0,         0,       0],
+    "SQL":                [3,       0,        0,         0,       0],
+    "Machine Learning":   [2,       0,        0,         0,       0],
+    "Cloud Computing":    [2,       0,        0,         0,       0],
+    "NLP":                [1,       0,        0,         0,       0],
+    "Data Visualization": [5,       0,        0,         0,       0],
 }
 
-df_skills = pd.DataFrame(skills_data)
-df_skills.set_index("Name", inplace=True)
+df_skills = pd.DataFrame(skills_data).set_index("Name")
 df_skills
 ```
 
 ---
 
-## 3.1.2 Team Skill Heatmap
+## Skill Heatmap
 
 ```{python}
-plt.figure(figsize=(12, 6))
-sns.heatmap(
+os.makedirs("figures", exist_ok=True)
+
+fig = px.imshow(
     df_skills,
-    annot=True,
-    cmap="coolwarm",
-    linewidths=0.5,
-    vmin=0,
-    vmax=5,
-    fmt="d"
+    text_auto=True,
+    color_continuous_scale="RdYlGn",
+    zmin=0,
+    zmax=5,
+    aspect="auto",
+    title="Team Skill Levels (1=Beginner, 5=Expert)",
+    **{k: v for k, v in PLOTLY_THEME.items() if k in ["template"]}
 )
-plt.title("Team Skill Levels Heatmap", fontsize=14)
-plt.xlabel("Skills")
-plt.ylabel("Team Members")
-plt.tight_layout()
-plt.savefig("figures/skill_heatmap.png", dpi=150, bbox_inches="tight")
-plt.show()
+fig.update_layout(
+    font=PLOTLY_THEME["font"],
+    title_font=PLOTLY_THEME["title_font"],
+    coloraxis_colorbar=dict(title="Level"),
+    xaxis_title="Skill",
+    yaxis_title="Team Member"
+)
+
+fig.write_image("figures/skill_heatmap.png", width=900, height=450, scale=2)
+fig.show()
 ```
+
+![Team Skill Heatmap](../figures/skill_heatmap.png)
 
 ---
 
-## 3.1.3 Compare Team Skills to Industry Requirements
+## Team Average vs Industry Expectation
 
 ```{python}
-from collections import Counter
+# Industry expectations for IT/data roles (sourced from Lightcast top skills)
+industry_expectation = {
+    "Python":             4,
+    "SQL":                4,
+    "Machine Learning":   3,
+    "Cloud Computing":    3,
+    "NLP":                2,
+    "Data Visualization": 4,
+}
 
-# Top skills extracted from Lightcast IT job postings
-top_skills = [
-    "Python", "SQL", "Machine Learning", "AWS",
-    "Data Visualization", "Statistics", "Big Data / Spark",
-    "Excel", "Business Analytics"
-]
-
-job_skill_counts = Counter(top_skills)
-
-# Add any missing skills with 0
-for skill in top_skills:
-    if skill not in df_skills.columns:
-        df_skills[skill] = 0
-
-# Team average vs industry demand
-team_avg = df_skills.mean()
-industry_demand = pd.Series({skill: 4 for skill in top_skills})
+team_avg = df_skills.mean().round(2)
+industry = pd.Series(industry_expectation)
 
 gap_df = pd.DataFrame({
-    "Team Average": team_avg,
-    "Industry Expectation": industry_demand
-})
+    "Team Average":         team_avg,
+    "Industry Expectation": industry,
+}).reset_index().rename(columns={"index": "Skill"})
 
-gap_df["Gap"] = gap_df["Industry Expectation"] - gap_df["Team Average"]
+gap_df["Gap"] = (gap_df["Industry Expectation"] - gap_df["Team Average"]).round(2)
 gap_df = gap_df.sort_values("Gap", ascending=False)
-gap_df
-```
 
----
-
-## 3.1.4 Skill Gap Visualization
-
-```{python}
-plt.figure(figsize=(12, 6))
-gap_df[["Team Average", "Industry Expectation"]].plot(
-    kind="bar",
-    figsize=(12, 6),
-    color=["steelblue", "tomato"],
-    edgecolor="black"
+fig2 = go.Figure()
+fig2.add_trace(go.Bar(
+    name="Team Average",
+    x=gap_df["Skill"],
+    y=gap_df["Team Average"],
+    marker_color="#2c7bb6"
+))
+fig2.add_trace(go.Bar(
+    name="Industry Expectation",
+    x=gap_df["Skill"],
+    y=gap_df["Industry Expectation"],
+    marker_color="#d7191c"
+))
+fig2.update_layout(
+    barmode="group",
+    title="Team Skills vs Industry Expectations",
+    xaxis_title="Skill",
+    yaxis_title="Proficiency Level (1–5)",
+    yaxis=dict(range=[0, 5.5]),
+    legend=dict(orientation="h", y=-0.2),
+    font=PLOTLY_THEME["font"],
+    title_font=PLOTLY_THEME["title_font"],
+    template=PLOTLY_THEME["template"]
 )
-plt.title("Team Skills vs Industry Expectations", fontsize=14)
-plt.xlabel("Skills")
-plt.ylabel("Proficiency Level (1-5)")
-plt.xticks(rotation=45, ha="right")
-plt.legend(["Team Average", "Industry Expectation"])
-plt.tight_layout()
-plt.savefig("figures/skill_gap_bar.png", dpi=150, bbox_inches="tight")
-plt.show()
+
+fig2.write_image("figures/skill_gap_bar.png", width=900, height=500, scale=2)
+fig2.show()
 ```
+
+![Skill Gap Bar Chart](../figures/skill_gap_bar.png)
 
 ---
 
-## 3.1.5 Improvement Plan
+## Improvement Plan
 
-Based on the skill gap analysis, here are the priority areas for each team member:
-
-| Team Member | Priority Skills to Learn | Recommended Resources |
+| Team Member | Priority Skills | Recommended Resources |
 |---|---|---|
-| Antara | Machine Learning, Statistics, AWS | Coursera ML Course, AWS Training |
-| Julie | TBD | TBD |
+| Julie | NLP, Machine Learning | fast.ai, Hugging Face course |
 | Yifan | TBD | TBD |
 | Zhiyang | TBD | TBD |
 | Alina | TBD | TBD |
+| Antara | TBD | TBD |
 
 ### Team Collaboration Plan
-- **Antara** leads: Data sourcing,  Data cleaning, SQL, Business Analytics
-- **Julie** leads: TBD
+
+- **Julie** leads: Data Visualization, EDA
 - **Yifan** leads: TBD
 - **Zhiyang** leads: TBD
 - **Alina** leads: TBD
-
----
-
-
-
+- **Antara** leads: Data Cleaning, SQL, Business Analytics
