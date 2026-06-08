@@ -31,15 +31,15 @@ PLOTLY_THEME = dict(
 # TODO: Yifan, Zhiyang, Alina — fill in your own row before final submission
 skills_data = {
     "Name":               ["Antara", "Julie", "Yifan", "Zhiyang", "Alina"],
-    "Python":             [3,         3,       0,        0,         0],
-    "SQL":                [4,         3,       0,        0,         0],
-    "Machine Learning":   [2,         2,       0,        0,         0],
-    "AWS":                [2,         2,       0,        0,         0],
-    "Data Visualization": [4,         5,       0,        0,         0],
-    "Statistics":         [2,         3,       0,        0,         0],
-    "Big Data / Spark":   [2,         2,       0,        0,         0],
-    "Excel":              [4,         4,       0,        0,         0],
-    "Business Analytics": [4,         4,       0,        0,         0],
+    "Python":             [3,         3,       0,        3,         0],
+    "SQL":                [4,         3,       0,        3,         0],
+    "Machine Learning":   [2,         2,       0,        2,         0],
+    "AWS":                [2,         2,       0,        5,         0],
+    "Data Visualization": [4,         5,       0,        3,         0],
+    "Statistics":         [2,         3,       0,        2,         0],
+    "Big Data / Spark":   [2,         2,       0,        2,         0],
+    "Excel":              [4,         4,       0,        5,         0],
+    "Business Analytics": [4,         4,       0,        4,         0],
 }
 
 df_skills = pd.DataFrame(skills_data).set_index("Name")
