@@ -6,7 +6,7 @@ execute:
 
 ## Overview
 
-This section compares the skills required in IT job postings against the actual skills of our group members to identify knowledge gaps and areas for improvement.
+This section compares the most in-demand skills from Lightcast 2024 IT job postings against the actual skills of our group members to identify knowledge gaps and areas for improvement.
 
 Proficiency scale: **1 = Beginner → 5 = Expert**
 
@@ -18,6 +18,7 @@ Proficiency scale: **1 = Beginner → 5 = Expert**
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+from collections import Counter
 import os
 
 # Shared Plotly theme — must match eda.qmd
@@ -54,20 +55,17 @@ fig = px.imshow(
     df_skills,
     text_auto=True,
     color_continuous_scale="RdYlGn",
-    zmin=0,
-    zmax=5,
+    zmin=0, zmax=5,
     aspect="auto",
     title="Team Skill Levels (1=Beginner, 5=Expert)",
-    **{k: v for k, v in PLOTLY_THEME.items() if k in ["template"]}
+    template="plotly_white"
 )
 fig.update_layout(
     font=PLOTLY_THEME["font"],
     title_font=PLOTLY_THEME["title_font"],
-    coloraxis_colorbar=dict(title="Level"),
     xaxis_title="Skill",
     yaxis_title="Team Member"
 )
-
 fig.write_image("figures/skill_heatmap.png", width=900, height=450, scale=2)
 fig.show()
 ```
@@ -76,27 +74,45 @@ fig.show()
 
 ---
 
-## Team Average vs Industry Expectation
+## Top In-Demand Skills from Lightcast Job Postings
 
 ```{python}
-# Industry expectations for IT/data roles (sourced from Lightcast top skills)
-industry_expectation = {
-    "Python":             4,
-    "SQL":                4,
-    "Machine Learning":   3,
-    "Cloud Computing":    3,
-    "NLP":                2,
-    "Data Visualization": 4,
+# Read pre-computed top skills from ETL output — no raw data loaded here
+df_top_skills = pd.read_csv("../data/processed/lightcast_top_skills.csv")
+df_top_skills
+```
+
+---
+
+## Team Average vs Industry Requirements
+
+```{python}
+# Map Lightcast skill names to team skill columns where applicable
+skill_map = {
+    "SQL (Programming Language)":   "SQL",
+    "Python (Programming Language)":"Python",
+    "Data Analysis":                "Data Visualization",
 }
 
-team_avg = df_skills.mean().round(2)
-industry = pd.Series(industry_expectation)
+# Build industry expectation from actual Lightcast counts (normalized to 1-5)
+max_count = df_top_skills["Count"].max()
+industry_exp = {}
+for _, row in df_top_skills.iterrows():
+    mapped = skill_map.get(row["Skill"])
+    if mapped and mapped in df_skills.columns:
+        score = round((row["Count"] / max_count) * 5, 1)
+        industry_exp[mapped] = score
 
+# Fill remaining team skills with a baseline expectation of 3
+for skill in df_skills.columns:
+    if skill not in industry_exp:
+        industry_exp[skill] = 3.0
+
+team_avg = df_skills.mean().round(2)
 gap_df = pd.DataFrame({
     "Team Average":         team_avg,
-    "Industry Expectation": industry,
+    "Industry Expectation": pd.Series(industry_exp),
 }).reset_index().rename(columns={"index": "Skill"})
-
 gap_df["Gap"] = (gap_df["Industry Expectation"] - gap_df["Team Average"]).round(2)
 gap_df = gap_df.sort_values("Gap", ascending=False)
 
@@ -115,16 +131,15 @@ fig2.add_trace(go.Bar(
 ))
 fig2.update_layout(
     barmode="group",
-    title="Team Skills vs Industry Expectations",
+    title="Team Skills vs Industry Expectations (from Lightcast Top Skills)",
     xaxis_title="Skill",
-    yaxis_title="Proficiency Level (1–5)",
+    yaxis_title="Proficiency Level (1-5)",
     yaxis=dict(range=[0, 5.5]),
     legend=dict(orientation="h", y=-0.2),
     font=PLOTLY_THEME["font"],
     title_font=PLOTLY_THEME["title_font"],
     template=PLOTLY_THEME["template"]
 )
-
 fig2.write_image("figures/skill_gap_bar.png", width=900, height=500, scale=2)
 fig2.show()
 ```
@@ -137,7 +152,7 @@ fig2.show()
 
 | Team Member | Priority Skills | Recommended Resources |
 |---|---|---|
-| Julie | NLP, Machine Learning | fast.ai, Hugging Face course |
+| Julie | NLP, Machine Learning | fast.ai, Hugging Face NLP course |
 | Yifan | TBD | TBD |
 | Zhiyang | TBD | TBD |
 | Alina | TBD | TBD |
