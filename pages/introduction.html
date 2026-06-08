@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>ETL Pipeline — Master Orchestrator – Job Market Analysis 2024</title>
+<title>Project Overview – Job Market Analysis 2024</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -22,41 +22,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -131,7 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../pages/introduction.html"> 
+    <a class="nav-link active" href="../pages/introduction.html" aria-current="page"> 
 <span class="menu-text">Project Overview</span></a>
   </li>  
   <li class="nav-item">
@@ -165,15 +130,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#research-questions" id="toc-research-questions" class="nav-link active" data-scroll-target="#research-questions">Research Questions</a></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
+  <li><a href="#team" id="toc-team" class="nav-link" data-scroll-target="#team">Team</a></li>
+  <li><a href="#project-phases" id="toc-project-phases" class="nav-link" data-scroll-target="#project-phases">Project Phases</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">ETL Pipeline — Master Orchestrator</h1>
+<h1 class="title">Project Overview</h1>
 </div>
 
 
@@ -190,12 +164,94 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Runs the full extract → transform → load pipeline. Add new datasets by repeating the three-step pattern below.</p>
-<div id="f6a7b8c9" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess, sys<span class="co"># Run each ETL step as a notebook so outputs are preservedsubprocess.run([sys.executable, "-m", "jupyter", "nbconvert", "--to", "notebook",                "--execute", "01_extract.ipynb", "--output", "01_extract.ipynb"], check=True)subprocess.run([sys.executable, "-m", "jupyter", "nbconvert", "--to", "notebook",                "--execute", "02_transform.ipynb", "--output", "02_transform.ipynb"], check=True)subprocess.run([sys.executable, "-m", "jupyter", "nbconvert", "--to", "notebook",                "--execute", "03_load.ipynb", "--output", "03_load.ipynb"], check=True)print("Pipeline complete.")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<section id="research-questions" class="level2">
+<h2 class="anchored" data-anchor-id="research-questions">Research Questions</h2>
+<ol type="1">
+<li>How do hiring patterns differ for men vs.&nbsp;women across industries?</li>
+<li>Do gender-based employment disparities vary between red and blue states?</li>
+</ol>
+</section>
+<section id="dataset" class="level2">
+<h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
+<ul>
+<li><strong>Primary:</strong> Lightcast 2024 Job Postings (~72,000 records after ETL)</li>
+<li><strong>Supplementary:</strong> IPUMS Household data (1.3M rows)</li>
+</ul>
+</section>
+<section id="team" class="level2">
+<h2 class="anchored" data-anchor-id="team">Team</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>GitHub</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Julie Ngo Tran</td>
+<td><a href="https://github.com/frjulie8-proj"><span class="citation" data-cites="frjulie8-proj">@frjulie8-proj</span></a></td>
+</tr>
+<tr class="even">
+<td>Alina Chen</td>
+<td><a href="https://github.com/alinayanxi"><span class="citation" data-cites="alinayanxi">@alinayanxi</span></a></td>
+</tr>
+<tr class="odd">
+<td>Yifan Cui</td>
+<td><a href="https://github.com/cyifan25-dot"><span class="citation" data-cites="cyifan25dot">@cyifan25dot</span></a></td>
+</tr>
+<tr class="even">
+<td>Zhiyang Guo</td>
+<td><a href="https://github.com/guozyang-6"><span class="citation" data-cites="guozyang6">@guozyang6</span></a></td>
+</tr>
+<tr class="odd">
+<td>Antara Sudhir</td>
+<td><a href="https://github.com/sudhir-antara"><span class="citation" data-cites="sudhirantara">@sudhirantara</span></a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="project-phases" class="level2">
+<h2 class="anchored" data-anchor-id="project-phases">Project Phases</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Phase</th>
+<th>Description</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Repo setup, ETL pipeline, site initialized</td>
+<td>Done</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Data extraction, relational table build</td>
+<td>Done</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>EDA, skill gap analysis, site restructure</td>
+<td>In Progress</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>ML methods — clustering</td>
+<td>Upcoming</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>NLP methods — job description mining</td>
+<td>Upcoming</td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>ETL Pipeline — Master Orchestrator – Job Market Analysis 2024</title>
+<title>Exploratory Analysis – Job Market Analysis 2024</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -22,41 +22,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -139,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Data Preparation</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../pages/eda.html"> 
+    <a class="nav-link active" href="../pages/eda.html" aria-current="page"> 
 <span class="menu-text">Exploratory Analysis</span></a>
   </li>  
   <li class="nav-item">
@@ -165,15 +130,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#salary-distribution" id="toc-salary-distribution" class="nav-link" data-scroll-target="#salary-distribution">Salary Distribution</a></li>
+  <li><a href="#top-industries-by-job-postings" id="toc-top-industries-by-job-postings" class="nav-link" data-scroll-target="#top-industries-by-job-postings">Top Industries by Job Postings</a></li>
+  <li><a href="#employment-type-breakdown" id="toc-employment-type-breakdown" class="nav-link" data-scroll-target="#employment-type-breakdown">Employment Type Breakdown</a></li>
+  <li><a href="#job-postings-by-state" id="toc-job-postings-by-state" class="nav-link" data-scroll-target="#job-postings-by-state">Job Postings by State</a></li>
+  <li><a href="#remote-vs-on-site-trends" id="toc-remote-vs-on-site-trends" class="nav-link" data-scroll-target="#remote-vs-on-site-trends">Remote vs On-Site Trends</a></li>
+  <li><a href="#education-level-requirements" id="toc-education-level-requirements" class="nav-link" data-scroll-target="#education-level-requirements">Education Level Requirements</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">ETL Pipeline — Master Orchestrator</h1>
+<h1 class="title">Exploratory Analysis</h1>
 </div>
 
 
@@ -190,12 +167,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Runs the full extract → transform → load pipeline. Add new datasets by repeating the three-step pattern below.</p>
-<div id="f6a7b8c9" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess, sys<span class="co"># Run each ETL step as a notebook so outputs are preservedsubprocess.run([sys.executable, "-m", "jupyter", "nbconvert", "--to", "notebook",                "--execute", "01_extract.ipynb", "--output", "01_extract.ipynb"], check=True)subprocess.run([sys.executable, "-m", "jupyter", "nbconvert", "--to", "notebook",                "--execute", "02_transform.ipynb", "--output", "02_transform.ipynb"], check=True)subprocess.run([sys.executable, "-m", "jupyter", "nbconvert", "--to", "notebook",                "--execute", "03_load.ipynb", "--output", "03_load.ipynb"], check=True)print("Pipeline complete.")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Exploratory Data Analysis of the 2024 Lightcast job postings dataset. All charts are pre-rendered and saved to <code>figures/</code> — no raw data is loaded at render time.</p>
+<hr>
+</section>
+<section id="salary-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="salary-distribution">Salary Distribution</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/eda_salary_dist.png" class="img-fluid figure-img"></p>
+<figcaption>Salary Distribution</figcaption>
+</figure>
 </div>
+<hr>
+</section>
+<section id="top-industries-by-job-postings" class="level2">
+<h2 class="anchored" data-anchor-id="top-industries-by-job-postings">Top Industries by Job Postings</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/eda_top_industries.png" class="img-fluid figure-img"></p>
+<figcaption>Top Industries</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+<section id="employment-type-breakdown" class="level2">
+<h2 class="anchored" data-anchor-id="employment-type-breakdown">Employment Type Breakdown</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/eda_employment_type.png" class="img-fluid figure-img"></p>
+<figcaption>Employment Type</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+<section id="job-postings-by-state" class="level2">
+<h2 class="anchored" data-anchor-id="job-postings-by-state">Job Postings by State</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/eda_jobs_by_state.png" class="img-fluid figure-img"></p>
+<figcaption>Jobs by State</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+<section id="remote-vs-on-site-trends" class="level2">
+<h2 class="anchored" data-anchor-id="remote-vs-on-site-trends">Remote vs On-Site Trends</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/eda_remote_type.png" class="img-fluid figure-img"></p>
+<figcaption>Remote vs On-Site</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+<section id="education-level-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="education-level-requirements">Education Level Requirements</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/eda_education.png" class="img-fluid figure-img"></p>
+<figcaption>Education Requirements</figcaption>
+</figure>
+</div>
+<hr>
+<blockquote class="blockquote">
+<p>Charts generated from <code>data/processed/lightcast_job_postings_relational.csv</code> and joined dimension tables. Source code in <code>eda_generate.py</code> (run locally before push).</p>
+</blockquote>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
