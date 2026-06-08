@@ -1,0 +1,12 @@
+{
+    python.defaultInterpreterPath: /home/ubuntu/.venv/bin/python,
+    jupyter.kernels.filter: [
+        {
+            path: /home/ubuntu/a02-sum26-frjulie8-proj/.venv/bin/python,
+            type: pythonEnvironment
+        }
+    ],
+    jupyter.kernels.excludePythonEnvironments: [
+        /home/ubuntu/a02-sum26-frjulie8-proj/.venv/bin/python
+    ]
+}
