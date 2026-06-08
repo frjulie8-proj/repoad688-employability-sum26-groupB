@@ -14,3 +14,4 @@ data/processed/person.csv
 data/processed/employment.csv
 data/processed/employed_only.csv
 
+data/clean/employed_only.csv
