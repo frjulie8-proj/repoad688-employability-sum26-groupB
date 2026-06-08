@@ -18,7 +18,6 @@ Proficiency scale: **1 = Beginner → 5 = Expert**
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from collections import Counter
 import os
 
 # Shared Plotly theme — must match eda.qmd
@@ -31,18 +30,16 @@ PLOTLY_THEME = dict(
 
 # TODO: Yifan, Zhiyang, Alina — fill in your own row before final submission
 skills_data = {
-    "Name":                ["Antara", "Julie", "Yifan", "Zhiyang", "Alina"],
-    "Python":              [3,         3,       0,        0,         0],
-    "SQL":                 [4,         3,       0,        0,         0],
-    "Machine Learning":    [2,         2,       0,        0,         0],
-    "AWS":                 [2,         0,       0,        0,         0],
-    "Cloud Computing":     [0,         2,       0,        0,         0],
-    "NLP":                 [0,         1,       0,        0,         0],
-    "Data Visualization":  [4,         5,       0,        0,         0],
-    "Statistics":          [2,         0,       0,        0,         0],
-    "Big Data / Spark":    [2,         0,       0,        0,         0],
-    "Excel":               [4,         0,       0,        0,         0],
-    "Business Analytics":  [4,         0,       0,        0,         0],
+    "Name":               ["Antara", "Julie", "Yifan", "Zhiyang", "Alina"],
+    "Python":             [3,         3,       0,        0,         0],
+    "SQL":                [4,         3,       0,        0,         0],
+    "Machine Learning":   [2,         2,       0,        0,         0],
+    "AWS":                [2,         2,       0,        0,         0],
+    "Data Visualization": [4,         5,       0,        0,         0],
+    "Statistics":         [2,         3,       0,        0,         0],
+    "Big Data / Spark":   [2,         2,       0,        0,         0],
+    "Excel":              [4,         4,       0,        0,         0],
+    "Business Analytics": [4,         4,       0,        0,         0],
 }
 
 df_skills = pd.DataFrame(skills_data).set_index("Name")
@@ -92,13 +89,12 @@ df_top_skills
 ## Team Average vs Industry Requirements
 
 ```{python}
-# Map Lightcast skill names to team skill columns
 skill_map = {
-    "SQL (Programming Language)":              "SQL",
-    "Python (Programming Language)":           "Python",
-    "Data Analysis":                           "Data Visualization",
-    "Microsoft Excel":                         "Excel",
-    "SAP Applications":                        "Business Analytics",
+    "SQL (Programming Language)":   "SQL",
+    "Python (Programming Language)": "Python",
+    "Data Analysis":                "Data Visualization",
+    "Microsoft Excel":              "Excel",
+    "SAP Applications":             "Business Analytics",
 }
 
 max_count = df_top_skills["Count"].max()
@@ -107,8 +103,6 @@ for _, row in df_top_skills.iterrows():
     mapped = skill_map.get(row["Skill"])
     if mapped and mapped in df_skills.columns:
         industry_exp[mapped] = round((row["Count"] / max_count) * 5, 1)
-
-# Baseline expectation of 3 for unmapped skills
 for skill in df_skills.columns:
     if skill not in industry_exp:
         industry_exp[skill] = 3.0
@@ -122,18 +116,8 @@ gap_df["Gap"] = (gap_df["Industry Expectation"] - gap_df["Team Average"]).round(
 gap_df = gap_df.sort_values("Gap", ascending=False)
 
 fig2 = go.Figure()
-fig2.add_trace(go.Bar(
-    name="Team Average",
-    x=gap_df["Skill"],
-    y=gap_df["Team Average"],
-    marker_color="#2c7bb6"
-))
-fig2.add_trace(go.Bar(
-    name="Industry Expectation",
-    x=gap_df["Skill"],
-    y=gap_df["Industry Expectation"],
-    marker_color="#d7191c"
-))
+fig2.add_trace(go.Bar(name="Team Average", x=gap_df["Skill"], y=gap_df["Team Average"], marker_color="#2c7bb6"))
+fig2.add_trace(go.Bar(name="Industry Expectation", x=gap_df["Skill"], y=gap_df["Industry Expectation"], marker_color="#d7191c"))
 fig2.update_layout(
     barmode="group",
     title="Team Skills vs Industry Expectations (sourced from Lightcast)",
@@ -157,8 +141,8 @@ fig2.show()
 
 | Team Member | Priority Skills | Recommended Resources |
 |---|---|---|
-| Antara | Machine Learning, Statistics, NLP | Coursera ML, fast.ai |
-| Julie | NLP, AWS, Statistics | Hugging Face NLP course, AWS Training |
+| Antara | Machine Learning, Statistics | Coursera ML, Khan Academy Stats |
+| Julie | Machine Learning, AWS | fast.ai, AWS Training |
 | Yifan | TBD | TBD |
 | Zhiyang | TBD | TBD |
 | Alina | TBD | TBD |
@@ -166,7 +150,7 @@ fig2.show()
 ### Team Collaboration Plan
 
 - **Antara** leads: Data Cleaning, SQL, Business Analytics, Excel
-- **Julie** leads: Data Visualization, EDA, Cloud Computing
+- **Julie** leads: Data Visualization, EDA
 - **Yifan** leads: TBD
 - **Zhiyang** leads: TBD
 - **Alina** leads: TBD
