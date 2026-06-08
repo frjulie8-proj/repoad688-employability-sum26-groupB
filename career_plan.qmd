@@ -1,0 +1,29 @@
+---
+title: "Career Strategy"
+---
+
+## Overview
+
+This section maps individual skill gaps identified in the Skill Gap Analysis to concrete career development actions for each team member.
+
+## Career Path Targets
+
+| Team Member | Target Role |
+|-------------|-------------|
+| Julie | Data Analyst / Business Intelligence |
+| Yifan | TBD |
+| Zhiyang | TBD |
+| Alina | TBD |
+| Antara | Data Engineer / Analytics |
+
+## Action Plan Framework
+
+For each team member:
+
+1. Priority skills based on gap vs. industry expectation
+2. Recommended resources: courses, certifications, projects
+3. Timeline: short-term (1-3 months) vs. long-term (6-12 months)
+
+## Status
+
+To be completed after skill gap ratings are finalized by all team members.

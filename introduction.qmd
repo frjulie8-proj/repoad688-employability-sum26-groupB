@@ -1,0 +1,33 @@
+---
+title: Project Overview
+---
+
+## Research Questions
+
+1. How do hiring patterns differ for men vs. women across industries?
+2. Do gender-based employment disparities vary between red and blue states?
+
+## Dataset
+
+- **Primary:** Lightcast 2024 Job Postings (~72,000 records after ETL)
+- **Supplementary:** IPUMS Household data (1.3M rows)
+
+## Team
+
+| Name | GitHub |
+|------|--------|
+| Julie Ngo Tran | [@frjulie8-proj](https://github.com/frjulie8-proj) |
+| Alina Chen | [@alinayanxi](https://github.com/alinayanxi) |
+| Yifan Cui | [@cyifan25dot](https://github.com/cyifan25-dot) |
+| Zhiyang Guo | [@guozyang6](https://github.com/guozyang-6) |
+| Antara Sudhir | [@sudhirantara](https://github.com/sudhir-antara) |
+
+## Project Phases
+
+| Phase | Description | Status |
+|-------|-------------|--------|
+| 1 | Repo setup, ETL pipeline, site initialized | Done |
+| 2 | Data extraction, relational table build | Done |
+| 3 | EDA, skill gap analysis, site restructure | In Progress |
+| 4 | ML methods — clustering | Upcoming |
+| 5 | NLP methods — job description mining | Upcoming |

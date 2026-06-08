@@ -3,14 +3,30 @@ project:
 
 website:
   site-url: https://frjulie8-proj.github.io/repoad688-employability-sum26-groupB/
-  title: "Gender Disparities in Hiring & Political Influence"
+  title: Job Market Analysis 2024
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - href: about.qmd
-        text: About
+      - href: introduction.qmd
+        text: Project Overview
+      - href: data_cleaning.qmd
+        text: Data Preparation
+      - href: eda.qmd
+        text: Exploratory Analysis
+      - href: skill_gap_analysis.qmd
+        text: Skill Gap Analysis
+      - href: ml_methods.qmd
+        text: Predictive Modeling
+      - href: career_plan.qmd
+        text: Career Strategy
 
 format:
   html:
     theme: cosmo
+    toc: true
+
+execute:
+  echo: true
+  eval: false
+  code-fold: true

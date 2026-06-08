@@ -1,0 +1,36 @@
+---
+title: "Data Preparation"
+---
+
+## Overview
+
+This section documents the ETL pipeline used to extract, clean, and structure the raw Lightcast job postings dataset for analysis.
+
+## ETL Pipeline
+
+The pipeline runs in three steps via `etl/etl_pipeline.ipynb`:
+
+| Step | Notebook | Module | Output |
+|------|----------|--------|--------|
+| Extract | 01_extract.ipynb | extract.py | Raw DataFrame loaded into memory |
+| Transform | 02_transform.ipynb | transform.py | Cleaned, column-reduced DataFrame |
+| Load | 03_load.ipynb | load.py | Relational CSVs saved to data/processed/ |
+
+## Transform Decisions
+
+- **Columns dropped:** Metadata fields (URLs, timestamps), redundant code columns where NAME versions were kept, sparse skill/certification columns
+- **Missing value strategies:** Salary filled with median; education/employment type filled with Unknown; experience left as-is (null = not specified)
+- **Red/Blue state join:** POLITICAL_LEAN column ready to merge once state_political_lean.csv is supplied
+
+## Processed Tables
+
+| File | Rows | Description |
+|------|------|-------------|
+| lightcast_job_postings_relational.csv | 72,455 | Core fact table |
+| lightcast_salary.csv | 8,092 | Salary range by job |
+| lightcast_location.csv | 52 | State lookup |
+| lightcast_industry.csv | 22 | NAICS2 industry labels |
+| lightcast_education.csv | 7 | Education level labels |
+| lightcast_experience.csv | 18 | Experience range labels |
+| lightcast_occupation.csv | 2 | SOC occupation labels |
+| household.csv | 1,348,324 | IPUMS household data |

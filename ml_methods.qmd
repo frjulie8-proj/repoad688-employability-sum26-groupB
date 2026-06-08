@@ -1,0 +1,19 @@
+---
+title: "Predictive Modeling"
+---
+
+## Overview
+
+This section will cover machine learning methods applied to the Lightcast job postings data, focusing on clustering and classification techniques to uncover patterns in hiring.
+
+## Planned Methods
+
+| Method | Goal |
+|--------|------|
+| K-Means Clustering | Group job postings by salary, industry, and education requirements |
+| Logistic Regression | Predict employment type (full-time vs. part-time) |
+| Random Forest | Identify top features driving salary range |
+
+## Status
+
+> Coming in Phase 4. ETL and EDA must be finalized first.
