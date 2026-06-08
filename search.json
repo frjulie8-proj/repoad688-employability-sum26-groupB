@@ -25,14 +25,14 @@
     "href": "pages/eda.html",
     "title": "Exploratory Analysis",
     "section": "",
-    "text": "Exploratory Data Analysis of the 2024 Lightcast job postings dataset. All charts are pre-rendered and saved to figures/ — no raw data is loaded at render time."
+    "text": "Exploratory Data Analysis of the 2024 Lightcast job postings dataset. All charts are pre-rendered and saved to assets/figures/ — no raw data is loaded at render time."
   },
   {
     "objectID": "pages/eda.html#overview",
     "href": "pages/eda.html#overview",
     "title": "Exploratory Analysis",
     "section": "",
-    "text": "Exploratory Data Analysis of the 2024 Lightcast job postings dataset. All charts are pre-rendered and saved to figures/ — no raw data is loaded at render time."
+    "text": "Exploratory Data Analysis of the 2024 Lightcast job postings dataset. All charts are pre-rendered and saved to assets/figures/ — no raw data is loaded at render time."
   },
   {
     "objectID": "pages/eda.html#salary-distribution",
@@ -235,7 +235,7 @@
     "href": "pages/skill_gap_analysis.html#skill-heatmap",
     "title": "Skill Gap Analysis",
     "section": "Skill Heatmap",
-    "text": "Skill Heatmap\n\nos.makedirs(\"figures\", exist_ok=True)\n\nfig = px.imshow(\n    df_skills,\n    text_auto=True,\n    color_continuous_scale=\"RdYlGn\",\n    zmin=0, zmax=5,\n    aspect=\"auto\",\n    title=\"Team Skill Levels (1=Beginner, 5=Expert)\",\n    template=\"plotly_white\"\n)\nfig.update_layout(\n    font=PLOTLY_THEME[\"font\"],\n    title_font=PLOTLY_THEME[\"title_font\"],\n    xaxis_title=\"Skill\",\n    yaxis_title=\"Team Member\"\n)\nfig.write_image(\"figures/skill_heatmap.png\", width=1100, height=500, scale=2)\nfig.show()\n\n\n\n\nTeam Skill Heatmap"
+    "text": "Skill Heatmap\n\nos.makedirs(\"assets/figures\", exist_ok=True)\n\nfig = px.imshow(\n    df_skills,\n    text_auto=True,\n    color_continuous_scale=\"RdYlGn\",\n    zmin=0, zmax=5,\n    aspect=\"auto\",\n    title=\"Team Skill Levels (1=Beginner, 5=Expert)\",\n    template=\"plotly_white\"\n)\nfig.update_layout(\n    font=PLOTLY_THEME[\"font\"],\n    title_font=PLOTLY_THEME[\"title_font\"],\n    xaxis_title=\"Skill\",\n    yaxis_title=\"Team Member\"\n)\nfig.write_image(\"assets/figures/skill_heatmap.png\", width=1100, height=500, scale=2)\nfig.show()\n\n\n\n\nTeam Skill Heatmap"
   },
   {
     "objectID": "pages/skill_gap_analysis.html#top-in-demand-skills-from-lightcast-job-postings",
@@ -249,7 +249,7 @@
     "href": "pages/skill_gap_analysis.html#team-average-vs-industry-requirements",
     "title": "Skill Gap Analysis",
     "section": "Team Average vs Industry Requirements",
-    "text": "Team Average vs Industry Requirements\n\nskill_map = {\n    \"SQL (Programming Language)\":   \"SQL\",\n    \"Python (Programming Language)\": \"Python\",\n    \"Data Analysis\":                \"Data Visualization\",\n    \"Microsoft Excel\":              \"Excel\",\n    \"SAP Applications\":             \"Business Analytics\",\n}\n\nmax_count = df_top_skills[\"Count\"].max()\nindustry_exp = {}\nfor _, row in df_top_skills.iterrows():\n    mapped = skill_map.get(row[\"Skill\"])\n    if mapped and mapped in df_skills.columns:\n        industry_exp[mapped] = round((row[\"Count\"] / max_count) * 5, 1)\nfor skill in df_skills.columns:\n    if skill not in industry_exp:\n        industry_exp[skill] = 3.0\n\nteam_avg = df_skills.mean().round(2)\ngap_df = pd.DataFrame({\n    \"Team Average\":         team_avg,\n    \"Industry Expectation\": pd.Series(industry_exp),\n}).reset_index().rename(columns={\"index\": \"Skill\"})\ngap_df[\"Gap\"] = (gap_df[\"Industry Expectation\"] - gap_df[\"Team Average\"]).round(2)\ngap_df = gap_df.sort_values(\"Gap\", ascending=False)\n\nfig2 = go.Figure()\nfig2.add_trace(go.Bar(name=\"Team Average\", x=gap_df[\"Skill\"], y=gap_df[\"Team Average\"], marker_color=\"#2c7bb6\"))\nfig2.add_trace(go.Bar(name=\"Industry Expectation\", x=gap_df[\"Skill\"], y=gap_df[\"Industry Expectation\"], marker_color=\"#d7191c\"))\nfig2.update_layout(\n    barmode=\"group\",\n    title=\"Team Skills vs Industry Expectations (sourced from Lightcast)\",\n    xaxis_title=\"Skill\",\n    yaxis_title=\"Proficiency Level (1-5)\",\n    yaxis=dict(range=[0, 5.5]),\n    legend=dict(orientation=\"h\", y=-0.2),\n    font=PLOTLY_THEME[\"font\"],\n    title_font=PLOTLY_THEME[\"title_font\"],\n    template=PLOTLY_THEME[\"template\"]\n)\nfig2.write_image(\"figures/skill_gap_bar.png\", width=1100, height=550, scale=2)\nfig2.show()\n\n\n\n\nSkill Gap Bar Chart"
+    "text": "Team Average vs Industry Requirements\n\nskill_map = {\n    \"SQL (Programming Language)\":   \"SQL\",\n    \"Python (Programming Language)\": \"Python\",\n    \"Data Analysis\":                \"Data Visualization\",\n    \"Microsoft Excel\":              \"Excel\",\n    \"SAP Applications\":             \"Business Analytics\",\n}\n\nmax_count = df_top_skills[\"Count\"].max()\nindustry_exp = {}\nfor _, row in df_top_skills.iterrows():\n    mapped = skill_map.get(row[\"Skill\"])\n    if mapped and mapped in df_skills.columns:\n        industry_exp[mapped] = round((row[\"Count\"] / max_count) * 5, 1)\nfor skill in df_skills.columns:\n    if skill not in industry_exp:\n        industry_exp[skill] = 3.0\n\nteam_avg = df_skills.mean().round(2)\ngap_df = pd.DataFrame({\n    \"Team Average\":         team_avg,\n    \"Industry Expectation\": pd.Series(industry_exp),\n}).reset_index().rename(columns={\"index\": \"Skill\"})\ngap_df[\"Gap\"] = (gap_df[\"Industry Expectation\"] - gap_df[\"Team Average\"]).round(2)\ngap_df = gap_df.sort_values(\"Gap\", ascending=False)\n\nfig2 = go.Figure()\nfig2.add_trace(go.Bar(name=\"Team Average\", x=gap_df[\"Skill\"], y=gap_df[\"Team Average\"], marker_color=\"#2c7bb6\"))\nfig2.add_trace(go.Bar(name=\"Industry Expectation\", x=gap_df[\"Skill\"], y=gap_df[\"Industry Expectation\"], marker_color=\"#d7191c\"))\nfig2.update_layout(\n    barmode=\"group\",\n    title=\"Team Skills vs Industry Expectations (sourced from Lightcast)\",\n    xaxis_title=\"Skill\",\n    yaxis_title=\"Proficiency Level (1-5)\",\n    yaxis=dict(range=[0, 5.5]),\n    legend=dict(orientation=\"h\", y=-0.2),\n    font=PLOTLY_THEME[\"font\"],\n    title_font=PLOTLY_THEME[\"title_font\"],\n    template=PLOTLY_THEME[\"template\"]\n)\nfig2.write_image(\"assets/figures/skill_gap_bar.png\", width=1100, height=550, scale=2)\nfig2.show()\n\n\n\n\nSkill Gap Bar Chart"
   },
   {
     "objectID": "pages/skill_gap_analysis.html#improvement-plan",

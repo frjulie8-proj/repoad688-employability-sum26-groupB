@@ -212,7 +212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="team-skill-levels" class="level2">
 <h2 class="anchored" data-anchor-id="team-skill-levels">Team Skill Levels</h2>
-<div id="263ad997" class="cell" data-execution_count="1">
+<div id="29b32697" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
@@ -247,8 +247,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="skill-heatmap" class="level2">
 <h2 class="anchored" data-anchor-id="skill-heatmap">Skill Heatmap</h2>
-<div id="b310c56b" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>os.makedirs(<span class="st">"figures"</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<div id="9172dbb1" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>os.makedirs(<span class="st">"assets/figures"</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.imshow(</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    df_skills,</span>
@@ -265,12 +265,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    xaxis_title<span class="op">=</span><span class="st">"Skill"</span>,</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    yaxis_title<span class="op">=</span><span class="st">"Team Member"</span></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>fig.write_image(<span class="st">"figures/skill_heatmap.png"</span>, width<span class="op">=</span><span class="dv">1100</span>, height<span class="op">=</span><span class="dv">500</span>, scale<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>fig.write_image(<span class="st">"assets/figures/skill_heatmap.png"</span>, width<span class="op">=</span><span class="dv">1100</span>, height<span class="op">=</span><span class="dv">500</span>, scale<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../figures/skill_heatmap.png" class="img-fluid figure-img"></p>
+<p><img src="../assets/figures/skill_heatmap.png" class="img-fluid figure-img"></p>
 <figcaption>Team Skill Heatmap</figcaption>
 </figure>
 </div>
@@ -278,7 +278,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="top-in-demand-skills-from-lightcast-job-postings" class="level2">
 <h2 class="anchored" data-anchor-id="top-in-demand-skills-from-lightcast-job-postings">Top In-Demand Skills from Lightcast Job Postings</h2>
-<div id="6b1a1a8c" class="cell" data-execution_count="3">
+<div id="277ae323" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read pre-computed top skills from ETL output — no raw data loaded here</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_top_skills <span class="op">=</span> pd.read_csv(<span class="st">"../data/processed/lightcast_top_skills.csv"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_top_skills</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -287,7 +287,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="team-average-vs-industry-requirements" class="level2">
 <h2 class="anchored" data-anchor-id="team-average-vs-industry-requirements">Team Average vs Industry Requirements</h2>
-<div id="8a30e28e" class="cell" data-execution_count="4">
+<div id="9d0663f1" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>skill_map <span class="op">=</span> {</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SQL (Programming Language)"</span>:   <span class="st">"SQL"</span>,</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Python (Programming Language)"</span>: <span class="st">"Python"</span>,</span>
@@ -328,12 +328,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    title_font<span class="op">=</span>PLOTLY_THEME[<span class="st">"title_font"</span>],</span>
 <span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span>PLOTLY_THEME[<span class="st">"template"</span>]</span>
 <span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>fig2.write_image(<span class="st">"figures/skill_gap_bar.png"</span>, width<span class="op">=</span><span class="dv">1100</span>, height<span class="op">=</span><span class="dv">550</span>, scale<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>fig2.write_image(<span class="st">"assets/figures/skill_gap_bar.png"</span>, width<span class="op">=</span><span class="dv">1100</span>, height<span class="op">=</span><span class="dv">550</span>, scale<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>fig2.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../figures/skill_gap_bar.png" class="img-fluid figure-img"></p>
+<p><img src="../assets/figures/skill_gap_bar.png" class="img-fluid figure-img"></p>
 <figcaption>Skill Gap Bar Chart</figcaption>
 </figure>
 </div>
