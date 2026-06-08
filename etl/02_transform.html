@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -105,6 +105,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -191,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Defines <code>transform(df)</code> — selects relevant columns, cleans nulls, standardizes types, and merges red/blue state classification. Returns <code>df_clean</code>.</p>
-<div id="b2000002" class="cell" data-execution_count="1">
+<div id="b2000002" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-08T20:38:19.848813Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-08T20:38:19.847369Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-08T20:38:20.257285Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-08T20:38:20.255286Z&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> transform(df):</span>
@@ -286,36 +289,513 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_clean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="b2000003" class="cell">
+<div id="b2000003" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-08T20:38:20.282673Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-08T20:38:20.279049Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-08T20:38:35.187380Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-08T20:38:35.185605Z&quot;}}" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_raw <span class="op">=</span> pd.read_csv(<span class="st">'../data/raw/lightcast_2024.csv'</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df_clean <span class="op">=</span> transform(df_raw)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_15782/4128878503.py:2: DtypeWarning: Columns (0: COMPANY_IS_STAFFING, 1: IS_INTERNSHIP) have mixed types. Specify dtype option on import or set low_memory=False.
+  df_raw = pd.read_csv('../data/raw/lightcast_2024.csv')</code></pre>
 </div>
-<div id="b2000004" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_clean.head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Shape after transform: (72498, 52)
+
+Missing values:
+ ID                                 22
+LAST_UPDATED_DATE                  22
+POSTED                             22
+TITLE_CLEAN                       140
+TITLE_RAW                         104
+BODY                               44
+COMPANY                            44
+COMPANY_NAME                       44
+COMPANY_IS_STAFFING                44
+EDUCATION_LEVELS                   44
+EDUCATION_LEVELS_NAME              44
+MIN_EDULEVELS_NAME                 44
+MAX_EDULEVELS_NAME              56183
+EMPLOYMENT_TYPE_NAME               44
+REMOTE_TYPE_NAME                   44
+IS_INTERNSHIP                      44
+MIN_YEARS_EXPERIENCE            23146
+MAX_YEARS_EXPERIENCE            64068
+SALARY_FROM                     40100
+SALARY_TO                       40100
+CITY_NAME                          44
+MSA_NAME_INCOMING                3962
+NAICS2                             44
+NAICS2_NAME                        44
+NAICS4                             44
+NAICS4_NAME                        44
+NAICS6                             44
+NAICS6_NAME                        44
+SKILLS                             44
+SKILLS_NAME                        44
+COMMON_SKILLS                      44
+COMMON_SKILLS_NAME                 44
+SOFTWARE_SKILLS                    44
+SOFTWARE_SKILLS_NAME               44
+SOC_2                              44
+SOC_2_NAME                         44
+SOC_5                              44
+SOC_5_NAME                         44
+ONET                               44
+ONET_NAME                          44
+LOT_CAREER_AREA_NAME               44
+LOT_V6_CAREER_AREA                 44
+LOT_V6_CAREER_AREA_NAME            44
+LOT_V6_OCCUPATION_GROUP            44
+LOT_V6_OCCUPATION_GROUP_NAME       44
+LIGHTCAST_SECTORS_NAME          54711
+NAICS_2022_2                       44
+NAICS_2022_2_NAME                  44
+NAICS_2022_4                       44
+NAICS_2022_4_NAME                  44
+NAICS_2022_6                       44
+NAICS_2022_6_NAME                  44
+dtype: int64</code></pre>
 </div>
-<div id="cell-6" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ast</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Read raw file — only SKILLS_NAME column needed</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>df_raw <span class="op">=</span> pd.read_csv(<span class="st">"../data/raw/lightcast_job_postings.csv"</span>, usecols<span class="op">=</span>[<span class="st">"SKILLS_NAME"</span>])</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse and count skills across all postings</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>all_skills <span class="op">=</span> []</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> entry <span class="kw">in</span> df_raw[<span class="st">"SKILLS_NAME"</span>].dropna():</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        skills <span class="op">=</span> ast.literal_eval(entry)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        all_skills.extend(skills)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span>:</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        all_skills.extend([s.strip() <span class="cf">for</span> s <span class="kw">in</span> entry.split(<span class="st">","</span>)])</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>top_skills <span class="op">=</span> Counter(all_skills).most_common(<span class="dv">20</span>)</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>df_top_skills <span class="op">=</span> pd.DataFrame(top_skills, columns<span class="op">=</span>[<span class="st">"Skill"</span>, <span class="st">"Count"</span>])</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>df_top_skills.to_csv(<span class="st">"../data/processed/lightcast_top_skills.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Saved </span><span class="sc">{</span><span class="bu">len</span>(df_top_skills)<span class="sc">}</span><span class="ss"> skills to data/processed/lightcast_top_skills.csv"</span>)</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>df_top_skills</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="b2000004" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-08T20:38:35.190300Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-08T20:38:35.190027Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-08T20:38:35.235081Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-08T20:38:35.233225Z&quot;}}" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_clean.head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">ID</th>
+<th data-quarto-table-cell-role="th">LAST_UPDATED_DATE</th>
+<th data-quarto-table-cell-role="th">POSTED</th>
+<th data-quarto-table-cell-role="th">TITLE_CLEAN</th>
+<th data-quarto-table-cell-role="th">TITLE_RAW</th>
+<th data-quarto-table-cell-role="th">BODY</th>
+<th data-quarto-table-cell-role="th">COMPANY</th>
+<th data-quarto-table-cell-role="th">COMPANY_NAME</th>
+<th data-quarto-table-cell-role="th">COMPANY_IS_STAFFING</th>
+<th data-quarto-table-cell-role="th">EDUCATION_LEVELS</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">LOT_V6_CAREER_AREA_NAME</th>
+<th data-quarto-table-cell-role="th">LOT_V6_OCCUPATION_GROUP</th>
+<th data-quarto-table-cell-role="th">LOT_V6_OCCUPATION_GROUP_NAME</th>
+<th data-quarto-table-cell-role="th">LIGHTCAST_SECTORS_NAME</th>
+<th data-quarto-table-cell-role="th">NAICS_2022_2</th>
+<th data-quarto-table-cell-role="th">NAICS_2022_2_NAME</th>
+<th data-quarto-table-cell-role="th">NAICS_2022_4</th>
+<th data-quarto-table-cell-role="th">NAICS_2022_4_NAME</th>
+<th data-quarto-table-cell-role="th">NAICS_2022_6</th>
+<th data-quarto-table-cell-role="th">NAICS_2022_6_NAME</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>1f57d95acf4dc67ed2819eb12f049f6a5c11782c</td>
+<td>9/6/2024</td>
+<td>6/2/2024</td>
+<td>enterprise analyst ii iii</td>
+<td>Enterprise Analyst (II-III)</td>
+<td>31-May-2024\n\nEnterprise Analyst (II-III)\n\n...</td>
+<td>894731.0</td>
+<td>Murphy USA</td>
+<td>False</td>
+<td>[\n&nbsp;&nbsp;2\n]</td>
+<td>...</td>
+<td>Information Technology and Computer Science</td>
+<td>2310.0</td>
+<td>Business Intelligence</td>
+<td>[\n&nbsp;&nbsp;"Artificial Intelligence"\n]</td>
+<td>44.0</td>
+<td>Retail Trade</td>
+<td>4413.0</td>
+<td>Automotive Parts, Accessories, and Tire Retailers</td>
+<td>441330.0</td>
+<td>Automotive Parts and Accessories Retailers</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>0cb072af26757b6c4ea9464472a50a443af681ac</td>
+<td>8/2/2024</td>
+<td>6/2/2024</td>
+<td>oracle consultant reports</td>
+<td>Oracle Consultant - Reports (3592)</td>
+<td>Oracle Consultant - Reports (3592)\n\nat SMX i...</td>
+<td>133098.0</td>
+<td>Smx Corporation Limited</td>
+<td>True</td>
+<td>[\n&nbsp;&nbsp;99\n]</td>
+<td>...</td>
+<td>Information Technology and Computer Science</td>
+<td>2310.0</td>
+<td>Business Intelligence</td>
+<td>NaN</td>
+<td>56.0</td>
+<td>Administrative and Support and Waste Managemen...</td>
+<td>5613.0</td>
+<td>Employment Services</td>
+<td>561320.0</td>
+<td>Temporary Help Services</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>85318b12b3331fa490d32ad014379df01855c557</td>
+<td>9/6/2024</td>
+<td>6/2/2024</td>
+<td>data analyst</td>
+<td>Data Analyst</td>
+<td>Taking care of people is at the heart of every...</td>
+<td>39063746.0</td>
+<td>Sedgwick</td>
+<td>False</td>
+<td>[\n&nbsp;&nbsp;2\n]</td>
+<td>...</td>
+<td>Information Technology and Computer Science</td>
+<td>2311.0</td>
+<td>Data Analysis and Mathematics</td>
+<td>NaN</td>
+<td>52.0</td>
+<td>Finance and Insurance</td>
+<td>5242.0</td>
+<td>Agencies, Brokerages, and Other Insurance Rela...</td>
+<td>524291.0</td>
+<td>Claims Adjusting</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>1b5c3941e54a1889ef4f8ae55b401a550708a310</td>
+<td>9/6/2024</td>
+<td>6/2/2024</td>
+<td>sr lead data mgmt analyst sas product owner</td>
+<td>Sr. Lead Data Mgmt. Analyst - SAS Product Owner</td>
+<td>About this role:\n\nWells Fargo is looking for...</td>
+<td>37615159.0</td>
+<td>Wells Fargo</td>
+<td>False</td>
+<td>[\n&nbsp;&nbsp;99\n]</td>
+<td>...</td>
+<td>Information Technology and Computer Science</td>
+<td>2311.0</td>
+<td>Data Analysis and Mathematics</td>
+<td>[\n&nbsp;&nbsp;"Data Privacy/Protection"\n]</td>
+<td>52.0</td>
+<td>Finance and Insurance</td>
+<td>5221.0</td>
+<td>Depository Credit Intermediation</td>
+<td>522110.0</td>
+<td>Commercial Banking</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>cb5ca25f02bdf25c13edfede7931508bfd9e858f</td>
+<td>6/19/2024</td>
+<td>6/2/2024</td>
+<td>comisiones de por semana comiensa rapido</td>
+<td>Comisiones de $1000 - $3000 por semana... Comi...</td>
+<td>Comisiones de $1000 - $3000 por semana... Comi...</td>
+<td>0.0</td>
+<td>Unclassified</td>
+<td>False</td>
+<td>[\n&nbsp;&nbsp;99\n]</td>
+<td>...</td>
+<td>Information Technology and Computer Science</td>
+<td>2310.0</td>
+<td>Business Intelligence</td>
+<td>NaN</td>
+<td>99.0</td>
+<td>Unclassified Industry</td>
+<td>9999.0</td>
+<td>Unclassified Industry</td>
+<td>999999.0</td>
+<td>Unclassified Industry</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>35a6cd2183d9fb270e3f504b270f36d43cb759a6</td>
+<td>9/6/2024</td>
+<td>6/2/2024</td>
+<td>sr lead data analyst</td>
+<td>SR Lead Data Analyst</td>
+<td>About Lumen\n\nLumen connects the world. We ar...</td>
+<td>2233642.0</td>
+<td>Lumen Technologies</td>
+<td>False</td>
+<td>[\n&nbsp;&nbsp;2\n]</td>
+<td>...</td>
+<td>Information Technology and Computer Science</td>
+<td>2311.0</td>
+<td>Data Analysis and Mathematics</td>
+<td>NaN</td>
+<td>51.0</td>
+<td>Information</td>
+<td>5178.0</td>
+<td>All Other Telecommunications</td>
+<td>517810.0</td>
+<td>All Other Telecommunications</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>06de8d192f30b1d8d3c575d453faf143d332f4d4</td>
+<td>8/2/2024</td>
+<td>6/2/2024</td>
+<td>talent data analyst</td>
+<td>Talent Data Analyst</td>
+<td>Id : 2501314,\nTitle : Talent Data Analyst,\nC...</td>
+<td>44896740.0</td>
+<td>Semiconductor Components Industries</td>
+<td>False</td>
+<td>[\n&nbsp;&nbsp;2\n]</td>
+<td>...</td>
+<td>Information Technology and Computer Science</td>
+<td>2311.0</td>
+<td>Data Analysis and Mathematics</td>
+<td>NaN</td>
+<td>31.0</td>
+<td>Manufacturing</td>
+<td>3344.0</td>
+<td>Semiconductor and Other Electronic Component M...</td>
+<td>334413.0</td>
+<td>Semiconductor and Related Device Manufacturing</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>3d589c9d84677ca9468a5bc82295456e0ce6b13f</td>
+<td>9/6/2024</td>
+<td>6/2/2024</td>
+<td>data analyst</td>
+<td>Data Analyst</td>
+<td>Taking care of people is at the heart of every...</td>
+<td>39063746.0</td>
+<td>Sedgwick</td>
+<td>False</td>
+<td>[\n&nbsp;&nbsp;2\n]</td>
+<td>...</td>
+<td>Information Technology and Computer Science</td>
+<td>2311.0</td>
+<td>Data Analysis and Mathematics</td>
+<td>NaN</td>
+<td>52.0</td>
+<td>Finance and Insurance</td>
+<td>5242.0</td>
+<td>Agencies, Brokerages, and Other Insurance Rela...</td>
+<td>524291.0</td>
+<td>Claims Adjusting</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>5a843df632e1ff756fa19d80a0871262d51becc0</td>
+<td>6/21/2024</td>
+<td>6/2/2024</td>
+<td>sap sd otc consultant us</td>
+<td>SAP SD/OTC Consultant (US)</td>
+<td>SAP SD/OTC Consultant (US)\nSomerset, NJ - com...</td>
+<td>100173263.0</td>
+<td>Global Enterprise Partners</td>
+<td>True</td>
+<td>[\n&nbsp;&nbsp;99\n]</td>
+<td>...</td>
+<td>Information Technology and Computer Science</td>
+<td>2310.0</td>
+<td>Business Intelligence</td>
+<td>NaN</td>
+<td>99.0</td>
+<td>Unclassified Industry</td>
+<td>9999.0</td>
+<td>Unclassified Industry</td>
+<td>999999.0</td>
+<td>Unclassified Industry</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>229620073766234e814e8add21db7dfaef69b3bd</td>
+<td>10/9/2024</td>
+<td>6/2/2024</td>
+<td>sr marketing analyst</td>
+<td>Sr. Marketing Analyst</td>
+<td>Sr. Marketing Analyst\nUnited States, NY, New ...</td>
+<td>39016169.0</td>
+<td>Dassault SystÃ¨mes</td>
+<td>False</td>
+<td>[\n&nbsp;&nbsp;2,\n&nbsp;&nbsp;3\n]</td>
+<td>...</td>
+<td>Information Technology and Computer Science</td>
+<td>2311.0</td>
+<td>Data Analysis and Mathematics</td>
+<td>[\n&nbsp;&nbsp;"Artificial Intelligence"\n]</td>
+<td>54.0</td>
+<td>Professional, Scientific, and Technical Services</td>
+<td>5415.0</td>
+<td>Computer Systems Design and Related Services</td>
+<td>541511.0</td>
+<td>Custom Computer Programming Services</td>
+</tr>
+</tbody>
+</table>
+
+<p>10 rows × 52 columns</p>
+</div>
+</div>
+</div>
+<div id="0c2f3705" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-08T20:38:35.237912Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-08T20:38:35.237638Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-08T20:38:57.285849Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-08T20:38:57.284125Z&quot;}}" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sys.path.insert(<span class="dv">0</span>, <span class="st">".."</span>)  <span class="co"># project root so etl.load resolves</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> etl.load <span class="im">import</span> load</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename: two datasets in project (Lightcast + IPUMS) -- explicit prefix avoids confusion</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>df_lightcast_clean <span class="op">=</span> df_clean.copy()</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Persist to disk -- downstream relational table splits read from this file</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>load(df_lightcast_clean, <span class="st">"../data/processed/lightcast_clean.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[load] Saved  : ../data/processed/lightcast_clean.csv
+[load] Shape  : (72498, 52)
+[load] Size   : 523328.5 KB</code></pre>
+</div>
+</div>
+<div id="b267d079" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-08T20:38:57.288343Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-08T20:38:57.288093Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-08T20:39:06.306421Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-08T20:39:06.304924Z&quot;}}" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ast</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Read raw file — only SKILLS_NAME column needed</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>df_raw <span class="op">=</span> pd.read_csv(<span class="st">"../data/raw/lightcast_job_postings.csv"</span>, usecols<span class="op">=</span>[<span class="st">"SKILLS_NAME"</span>])</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse and count skills across all postings</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>all_skills <span class="op">=</span> []</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> entry <span class="kw">in</span> df_raw[<span class="st">"SKILLS_NAME"</span>].dropna():</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        skills <span class="op">=</span> ast.literal_eval(entry)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        all_skills.extend(skills)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span>:</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        all_skills.extend([s.strip() <span class="cf">for</span> s <span class="kw">in</span> entry.split(<span class="st">","</span>)])</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>top_skills <span class="op">=</span> Counter(all_skills).most_common(<span class="dv">20</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>df_top_skills <span class="op">=</span> pd.DataFrame(top_skills, columns<span class="op">=</span>[<span class="st">"Skill"</span>, <span class="st">"Count"</span>])</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>df_top_skills.to_csv(<span class="st">"../data/processed/lightcast_top_skills.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Saved </span><span class="sc">{</span><span class="bu">len</span>(df_top_skills)<span class="sc">}</span><span class="ss"> skills to data/processed/lightcast_top_skills.csv"</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>df_top_skills</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saved 20 skills to data/processed/lightcast_top_skills.csv</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Skill</th>
+<th data-quarto-table-cell-role="th">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Communication</td>
+<td>31661</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Data Analysis</td>
+<td>28515</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Management</td>
+<td>24631</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>SQL (Programming Language)</td>
+<td>21733</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Problem Solving</td>
+<td>18522</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Leadership</td>
+<td>17561</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>Computer Science</td>
+<td>17287</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>Operations</td>
+<td>14767</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>Project Management</td>
+<td>13711</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>Business Process</td>
+<td>13278</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>Business Requirements</td>
+<td>13035</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>Microsoft Excel</td>
+<td>12826</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>Finance</td>
+<td>12438</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">13</th>
+<td>Python (Programming Language)</td>
+<td>12253</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">14</th>
+<td>SAP Applications</td>
+<td>12123</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">15</th>
+<td>Detail Oriented</td>
+<td>11987</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16</th>
+<td>Presentations</td>
+<td>11890</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">17</th>
+<td>Dashboard</td>
+<td>11856</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">18</th>
+<td>Tableau (Business Intelligence Software)</td>
+<td>11781</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">19</th>
+<td>Planning</td>
+<td>11578</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
 </div>
 
 
