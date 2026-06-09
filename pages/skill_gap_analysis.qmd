@@ -1,7 +1,8 @@
 ---
 title: "Skill Gap Analysis"
 execute:
-  eval: false
+  freeze: false
+  cache: false
 ---
 
 ## Overview
