@@ -31,15 +31,15 @@ PLOTLY_THEME = dict(
 # TODO: Yifan, Zhiyang, Alina — fill in your own row before final submission
 skills_data = {
     "Name":               ["Antara", "Julie", "Yifan", "Zhiyang", "Alina"],
-    "Python":             [3,         3,       0,        3,         0],
-    "SQL":                [4,         3,       0,        3,         0],
-    "Machine Learning":   [2,         2,       0,        2,         0],
-    "AWS":                [2,         2,       0,        5,         0],
-    "Data Visualization": [4,         5,       0,        3,         0],
-    "Statistics":         [2,         3,       0,        2,         0],
-    "Big Data / Spark":   [2,         2,       0,        2,         0],
-    "Excel":              [4,         4,       0,        5,         0],
-    "Business Analytics": [4,         4,       0,        4,         0],
+    "Python":             [3,         3,       0,        3,         3],
+    "SQL":                [4,         3,       0,        3,         3],
+    "Machine Learning":   [2,         2,       0,        2,         1],
+    "AWS":                [2,         2,       0,        5,         2],
+    "Data Visualization": [4,         5,       0,        3,         4],
+    "Statistics":         [2,         3,       0,        2,         2],
+    "Big Data / Spark":   [2,         2,       0,        2,         2],
+    "Excel":              [4,         4,       0,        5,         3],
+    "Business Analytics": [4,         4,       0,        4,         4],
 }
 
 df_skills = pd.DataFrame(skills_data).set_index("Name")
@@ -145,7 +145,7 @@ fig2.show()
 | Julie | Machine Learning, AWS | fast.ai, AWS Training |
 | Yifan | TBD | TBD |
 | Zhiyang | TBD | TBD |
-| Alina | TBD | TBD |
+| Alina | Machine Learning, Advanced SQL | Coursera ML, Mode SQL Tutorial |
 
 ### Team Collaboration Plan
 
@@ -153,4 +153,4 @@ fig2.show()
 - **Julie** leads: Data Visualization, EDA
 - **Yifan** leads: TBD
 - **Zhiyang** leads: TBD
-- **Alina** leads: TBD
+- **Alina** leads: Skill Gap Analysis, Career Strategy, Insights & Presentation
