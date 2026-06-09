@@ -194,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Defines <code>transform(df)</code> — selects relevant columns, cleans nulls, standardizes types, and merges red/blue state classification. Returns <code>df_clean</code>.</p>
-<div id="b2000002" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-08T20:38:19.848813Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-08T20:38:19.847369Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-08T20:38:20.257285Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-08T20:38:20.255286Z&quot;}}" data-execution_count="1">
+<div id="b2000002" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-08T20:38:19.848813Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-08T20:38:19.847369Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-08T20:38:20.257285Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-08T20:38:20.255286Z&quot;}}" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> transform(df):</span>
@@ -289,13 +289,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_clean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="b2000003" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-08T20:38:20.282673Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-08T20:38:20.279049Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-08T20:38:35.187380Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-08T20:38:35.185605Z&quot;}}" data-execution_count="2">
+<div id="b2000003" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-08T20:38:20.282673Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-08T20:38:20.279049Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-08T20:38:35.187380Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-08T20:38:35.185605Z&quot;}}" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_raw <span class="op">=</span> pd.read_csv(<span class="st">'../data/raw/lightcast_2024.csv'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_raw <span class="op">=</span> pd.read_csv(<span class="st">'../data/raw/lightcast_job_postings.csv'</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df_clean <span class="op">=</span> transform(df_raw)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_15782/4128878503.py:2: DtypeWarning: Columns (0: COMPANY_IS_STAFFING, 1: IS_INTERNSHIP) have mixed types. Specify dtype option on import or set low_memory=False.
-  df_raw = pd.read_csv('../data/raw/lightcast_2024.csv')</code></pre>
+<pre><code>/tmp/ipykernel_3229/2499355372.py:2: DtypeWarning: Columns (0: COMPANY_IS_STAFFING, 1: IS_INTERNSHIP) have mixed types. Specify dtype option on import or set low_memory=False.
+  df_raw = pd.read_csv('../data/raw/lightcast_job_postings.csv')</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Shape after transform: (72498, 52)
@@ -356,9 +356,9 @@ NAICS_2022_6_NAME                  44
 dtype: int64</code></pre>
 </div>
 </div>
-<div id="b2000004" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-08T20:38:35.190300Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-08T20:38:35.190027Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-08T20:38:35.235081Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-08T20:38:35.233225Z&quot;}}" data-execution_count="3">
+<div id="b2000004" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-08T20:38:35.190300Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-08T20:38:35.190027Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-08T20:38:35.235081Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-08T20:38:35.233225Z&quot;}}" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_clean.head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 
 
@@ -637,7 +637,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="0c2f3705" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-08T20:38:35.237912Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-08T20:38:35.237638Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-08T20:38:57.285849Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-08T20:38:57.284125Z&quot;}}" data-execution_count="4">
+<div id="0c2f3705" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-08T20:38:35.237912Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-08T20:38:35.237638Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-08T20:38:57.285849Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-08T20:38:57.284125Z&quot;}}" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sys.path.insert(<span class="dv">0</span>, <span class="st">".."</span>)  <span class="co"># project root so etl.load resolves</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> etl.load <span class="im">import</span> load</span>
@@ -653,7 +653,7 @@ dtype: int64</code></pre>
 [load] Size   : 523328.5 KB</code></pre>
 </div>
 </div>
-<div id="b267d079" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-08T20:38:57.288343Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-08T20:38:57.288093Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-08T20:39:06.306421Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-08T20:39:06.304924Z&quot;}}" data-execution_count="5">
+<div id="b267d079" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-06-08T20:38:57.288343Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-06-08T20:38:57.288093Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-06-08T20:39:06.306421Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-06-08T20:39:06.304924Z&quot;}}" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ast</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -678,7 +678,7 @@ dtype: int64</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Saved 20 skills to data/processed/lightcast_top_skills.csv</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
 
@@ -795,6 +795,87 @@ dtype: int64</code></pre>
 </table>
 
 </div>
+</div>
+</div>
+<div id="6d0b4f02" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"../data/processed/lightcast_clean.csv"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>splits <span class="op">=</span> {</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lightcast_job_postings_relational.csv"</span>: [</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ID"</span>, <span class="st">"LAST_UPDATED_DATE"</span>, <span class="st">"POSTED"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"TITLE_CLEAN"</span>, <span class="st">"TITLE_RAW"</span>, <span class="st">"BODY"</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"COMPANY"</span>, <span class="st">"COMPANY_NAME"</span>, <span class="st">"COMPANY_IS_STAFFING"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"EMPLOYMENT_TYPE_NAME"</span>, <span class="st">"REMOTE_TYPE_NAME"</span>, <span class="st">"IS_INTERNSHIP"</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lightcast_education.csv"</span>: [</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ID"</span>, <span class="st">"EDUCATION_LEVELS"</span>, <span class="st">"EDUCATION_LEVELS_NAME"</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"MIN_EDULEVELS_NAME"</span>, <span class="st">"MAX_EDULEVELS_NAME"</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lightcast_experience.csv"</span>: [</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ID"</span>, <span class="st">"MIN_YEARS_EXPERIENCE"</span>, <span class="st">"MAX_YEARS_EXPERIENCE"</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lightcast_salary.csv"</span>: [</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ID"</span>, <span class="st">"SALARY_FROM"</span>, <span class="st">"SALARY_TO"</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lightcast_location.csv"</span>: [</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ID"</span>, <span class="st">"CITY_NAME"</span>, <span class="st">"MSA_NAME_INCOMING"</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lightcast_industry.csv"</span>: [</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ID"</span>,</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NAICS2"</span>, <span class="st">"NAICS2_NAME"</span>,</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NAICS4"</span>, <span class="st">"NAICS4_NAME"</span>,</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NAICS6"</span>, <span class="st">"NAICS6_NAME"</span>,</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NAICS_2022_2"</span>, <span class="st">"NAICS_2022_2_NAME"</span>,</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NAICS_2022_4"</span>, <span class="st">"NAICS_2022_4_NAME"</span>,</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NAICS_2022_6"</span>, <span class="st">"NAICS_2022_6_NAME"</span>,</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"LIGHTCAST_SECTORS_NAME"</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lightcast_skills.csv"</span>: [</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ID"</span>, <span class="st">"SKILLS"</span>, <span class="st">"SKILLS_NAME"</span>,</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">"COMMON_SKILLS"</span>, <span class="st">"COMMON_SKILLS_NAME"</span>,</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">"SOFTWARE_SKILLS"</span>, <span class="st">"SOFTWARE_SKILLS_NAME"</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lightcast_occupation.csv"</span>: [</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ID"</span>,</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"SOC_2"</span>, <span class="st">"SOC_2_NAME"</span>,</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>        <span class="st">"SOC_5"</span>, <span class="st">"SOC_5_NAME"</span>,</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ONET"</span>, <span class="st">"ONET_NAME"</span>,</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>        <span class="st">"LOT_CAREER_AREA_NAME"</span>,</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>        <span class="st">"LOT_V6_CAREER_AREA"</span>,</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>        <span class="st">"LOT_V6_CAREER_AREA_NAME"</span>,</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>        <span class="st">"LOT_V6_OCCUPATION_GROUP"</span>,</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>        <span class="st">"LOT_V6_OCCUPATION_GROUP_NAME"</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename, cols <span class="kw">in</span> splits.items():</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>    df[cols].to_csv(<span class="ss">f"../data/processed/</span><span class="sc">{</span>filename<span class="sc">}</span><span class="ss">"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(filename, df[cols].shape)</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Done. All split files regenerated from the 52-column lightcast_clean.csv."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>lightcast_job_postings_relational.csv (72498, 12)
+lightcast_education.csv (72498, 5)
+lightcast_experience.csv (72498, 3)
+lightcast_salary.csv (72498, 3)
+lightcast_location.csv (72498, 3)
+lightcast_industry.csv (72498, 14)
+lightcast_skills.csv (72498, 7)
+lightcast_occupation.csv (72498, 12)
+Done. All split files regenerated from the 52-column lightcast_clean.csv.</code></pre>
+</div>
+</div>
+<div id="01c573aa" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#test</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.read_csv(<span class="st">"../data/processed/lightcast_occupation.csv"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test.shape)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test.columns.tolist())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(72498, 12)
+['ID', 'SOC_2', 'SOC_2_NAME', 'SOC_5', 'SOC_5_NAME', 'ONET', 'ONET_NAME', 'LOT_CAREER_AREA_NAME', 'LOT_V6_CAREER_AREA', 'LOT_V6_CAREER_AREA_NAME', 'LOT_V6_OCCUPATION_GROUP', 'LOT_V6_OCCUPATION_GROUP_NAME']</code></pre>
 </div>
 </div>
 
