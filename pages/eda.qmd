@@ -102,25 +102,6 @@ df_jobs = load_job_postings()
 print(f"Job postings: {len(df_jobs):,} | Columns: {list(df_jobs.columns)}")
 ```
 
-### B1 — Posting Trend Over Time
-
-```{python}
-agg_trend = (df_jobs.groupby(["POSTED_MONTH", "EMPLOYMENT_TYPE_NAME"])
-             .size().reset_index(name="COUNT"))
-
-fig_b1 = px.line(
-    agg_trend, x="POSTED_MONTH", y="COUNT",
-    color="EMPLOYMENT_TYPE_NAME",
-    title="Job Postings Over Time by Employment Type",
-    labels={"POSTED_MONTH": "Month", "COUNT": "Postings",
-            "EMPLOYMENT_TYPE_NAME": "Employment Type"},
-    **PLOTLY_THEME
-)
-fig_b1.update_xaxes(type="category", tickangle=45)
-save_fig(fig_b1, "julie_postings_trend")
-fig_b1.show()
-```
-
 ### B2 — Postings by State
 
 ```{python}
