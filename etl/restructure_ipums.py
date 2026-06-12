@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # ── Constants ──────────────────────────────────────────────────────────────
-INPUT_FILE = os.path.expanduser("~/datasets/usa_00001.csv.gz")
+INPUT_FILE = os.path.expanduser("~/data/usa_00001.csv.gz")
 OUTPUT_DIR = os.path.expanduser("~/repoad688-employability-sum26-groupB/data/processed")
 
 # ── Lookup Maps ────────────────────────────────────────────────────────────
