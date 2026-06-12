@@ -47,3 +47,16 @@ All charts are pre-rendered and saved to `assets/figures/` — no raw data is lo
 
 > Charts generated from `data/processed/lightcast_job_postings_relational.csv` and joined dimension tables.
 > Source code in `eda_generate.py` (run locally before push).
+
+## Alina: Salary Analysis from Lightcast
+
+This section analyzes salary information from Lightcast job postings. The salary table contains 72,498 job postings, but only 32,398 postings include salary information, meaning approximately 55.3% of postings do not disclose salary fields.
+
+![](../assets/figures/alina_salary_distribution.png)
+
+The salary distribution shows that most postings with disclosed salary information cluster below the highest-paying outliers. The median lower-bound salary is approximately $88,000, while the mean is about $94,005, suggesting a right-skewed distribution.
+
+![](../assets/figures/alina_salary_boxplot.png)
+
+The boxplot confirms that salary postings contain substantial high-end outliers. This suggests that salary transparency and compensation levels vary widely across job postings and occupational categories.
+
