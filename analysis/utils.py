@@ -73,7 +73,7 @@ def load_job_postings() -> pd.DataFrame:
 
 # ── 7. load_location() — Julie ──────────────────
 def load_location() -> pd.DataFrame:
-    df = pd.read_csv(PROCESSED / "lightcast_location.csv")
+    df = pd.read_parquet(PROCESSED / "lightcast_location.parquet")
     df["STATE_CODE"] = (df["MSA_NAME_INCOMING"]
                         .str.split(",").str[-1]
                         .str.strip()
