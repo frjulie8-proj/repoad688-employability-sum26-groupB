@@ -142,6 +142,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#job-postings-by-state" id="toc-job-postings-by-state" class="nav-link" data-scroll-target="#job-postings-by-state">Job Postings by State</a></li>
   <li><a href="#remote-vs-on-site-trends" id="toc-remote-vs-on-site-trends" class="nav-link" data-scroll-target="#remote-vs-on-site-trends">Remote vs On-Site Trends</a></li>
   <li><a href="#education-level-requirements" id="toc-education-level-requirements" class="nav-link" data-scroll-target="#education-level-requirements">Education Level Requirements</a></li>
+  <li><a href="#alina-salary-analysis-from-lightcast" id="toc-alina-salary-analysis-from-lightcast" class="nav-link" data-scroll-target="#alina-salary-analysis-from-lightcast">Alina: Salary Analysis from Lightcast</a></li>
   </ul>
 </nav>
     </div>
@@ -234,6 +235,14 @@ ul.task-list li input[type="checkbox"] {
 <blockquote class="blockquote">
 <p>Charts generated from <code>data/processed/lightcast_job_postings_relational.csv</code> and joined dimension tables. Source code in <code>eda_generate.py</code> (run locally before push).</p>
 </blockquote>
+</section>
+<section id="alina-salary-analysis-from-lightcast" class="level2">
+<h2 class="anchored" data-anchor-id="alina-salary-analysis-from-lightcast">Alina: Salary Analysis from Lightcast</h2>
+<p>This section analyzes salary information from Lightcast job postings. The salary table contains 72,498 job postings, but only 32,398 postings include salary information, meaning approximately 55.3% of postings do not disclose salary fields.</p>
+<p><img src="../assets/figures/alina_salary_distribution.png" class="img-fluid"></p>
+<p>The salary distribution shows that most postings with disclosed salary information cluster below the highest-paying outliers. The median lower-bound salary is approximately $88,000, while the mean is about $94,005, suggesting a right-skewed distribution.</p>
+<p><img src="../assets/figures/alina_salary_boxplot.png" class="img-fluid"></p>
+<p>The boxplot confirms that salary postings contain substantial high-end outliers. This suggests that salary transparency and compensation levels vary widely across job postings and occupational categories.</p>
 
 
 </section>
