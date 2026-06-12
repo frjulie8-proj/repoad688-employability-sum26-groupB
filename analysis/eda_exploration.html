@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -105,6 +105,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -174,7 +177,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="cell-0" class="cell">
+<div id="cell-0" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -186,84 +189,563 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'display.float_format'</span>, <span class="st">'</span><span class="sc">{:,.2f}</span><span class="st">'</span>.<span class="bu">format</span>)</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Libraries loaded successfully!'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Libraries loaded successfully!</code></pre>
 </div>
-<div id="cell-1" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ipums_path <span class="op">=</span> os.path.expanduser(<span class="st">'~/repoad688-employability-sum26-groupB/data/processed/employed_only.csv'</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ipums <span class="op">=</span> pd.read_csv(ipums_path)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Shape: </span><span class="sc">{</span>ipums<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">Columns: </span><span class="sc">{</span>ipums<span class="sc">.</span>columns<span class="sc">.</span>tolist()<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ipums.head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-2" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Summary Statistics:'</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ipums.describe(include<span class="op">=</span><span class="st">'all'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-1" class="cell" data-execution_count="33">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ipums_path <span class="op">=</span> os.path.expanduser(<span class="st">'~/repoad688-employability-sum26-groupB/data/processed/employed_only.csv'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ipums <span class="op">=</span> pd.read_csv(ipums_path)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Shape: </span><span class="sc">{</span>ipums<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">Columns: </span><span class="sc">{</span>ipums<span class="sc">.</span>columns<span class="sc">.</span>tolist()<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ipums.head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Shape: (1572726, 13)
+
+Columns: ['SERIAL', 'PERNUM', 'SEX', 'AGE', 'RACE', 'STATEFIP', 'OCC', 'IND', 'INCWAGE', 'PERWT', 'SEX_LABEL', 'RACE_LABEL', 'STATE_NAME']</code></pre>
 </div>
-<div id="cell-3" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>missing <span class="op">=</span> ipums.isnull().<span class="bu">sum</span>()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>missing_pct <span class="op">=</span> (missing <span class="op">/</span> <span class="bu">len</span>(ipums) <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>missing_df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Missing Count'</span>: missing,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Missing %'</span>: missing_pct</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>}).query(<span class="st">'`Missing Count` &gt; 0'</span>).sort_values(<span class="st">'Missing %'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Columns with missing values: </span><span class="sc">{</span><span class="bu">len</span>(missing_df)<span class="sc">}</span><span class="ss"> of </span><span class="sc">{</span>ipums<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>missing_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">SERIAL</th>
+<th data-quarto-table-cell-role="th">PERNUM</th>
+<th data-quarto-table-cell-role="th">SEX</th>
+<th data-quarto-table-cell-role="th">AGE</th>
+<th data-quarto-table-cell-role="th">RACE</th>
+<th data-quarto-table-cell-role="th">STATEFIP</th>
+<th data-quarto-table-cell-role="th">OCC</th>
+<th data-quarto-table-cell-role="th">IND</th>
+<th data-quarto-table-cell-role="th">INCWAGE</th>
+<th data-quarto-table-cell-role="th">PERWT</th>
+<th data-quarto-table-cell-role="th">SEX_LABEL</th>
+<th data-quarto-table-cell-role="th">RACE_LABEL</th>
+<th data-quarto-table-cell-role="th">STATE_NAME</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>3800</td>
+<td>1</td>
+<td>1</td>
+<td>64</td>
+<td>1</td>
+<td>1</td>
+<td>8990</td>
+<td>570</td>
+<td>28000</td>
+<td>11.00</td>
+<td>Male</td>
+<td>White</td>
+<td>Alabama</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>3800</td>
+<td>2</td>
+<td>2</td>
+<td>52</td>
+<td>1</td>
+<td>1</td>
+<td>5740</td>
+<td>8191</td>
+<td>28000</td>
+<td>12.00</td>
+<td>Female</td>
+<td>White</td>
+<td>Alabama</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>3800</td>
+<td>4</td>
+<td>2</td>
+<td>26</td>
+<td>1</td>
+<td>1</td>
+<td>9141</td>
+<td>6180</td>
+<td>35200</td>
+<td>15.00</td>
+<td>Female</td>
+<td>White</td>
+<td>Alabama</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>3803</td>
+<td>1</td>
+<td>1</td>
+<td>64</td>
+<td>1</td>
+<td>1</td>
+<td>1010</td>
+<td>9480</td>
+<td>130000</td>
+<td>199.00</td>
+<td>Male</td>
+<td>White</td>
+<td>Alabama</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>3803</td>
+<td>3</td>
+<td>1</td>
+<td>34</td>
+<td>1</td>
+<td>1</td>
+<td>7240</td>
+<td>7190</td>
+<td>29100</td>
+<td>208.00</td>
+<td>Male</td>
+<td>White</td>
+<td>Alabama</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>3804</td>
+<td>1</td>
+<td>1</td>
+<td>36</td>
+<td>1</td>
+<td>1</td>
+<td>8140</td>
+<td>2870</td>
+<td>100000</td>
+<td>69.00</td>
+<td>Male</td>
+<td>White</td>
+<td>Alabama</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>3804</td>
+<td>2</td>
+<td>2</td>
+<td>34</td>
+<td>1</td>
+<td>1</td>
+<td>3500</td>
+<td>8191</td>
+<td>80000</td>
+<td>65.00</td>
+<td>Female</td>
+<td>White</td>
+<td>Alabama</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>3806</td>
+<td>1</td>
+<td>2</td>
+<td>42</td>
+<td>8</td>
+<td>1</td>
+<td>735</td>
+<td>8290</td>
+<td>150000</td>
+<td>373.00</td>
+<td>Female</td>
+<td>Two races</td>
+<td>Alabama</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>3807</td>
+<td>1</td>
+<td>2</td>
+<td>37</td>
+<td>1</td>
+<td>1</td>
+<td>2205</td>
+<td>7870</td>
+<td>15000</td>
+<td>73.00</td>
+<td>Female</td>
+<td>White</td>
+<td>Alabama</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>3807</td>
+<td>2</td>
+<td>1</td>
+<td>41</td>
+<td>2</td>
+<td>1</td>
+<td>5550</td>
+<td>6370</td>
+<td>73000</td>
+<td>101.00</td>
+<td>Male</td>
+<td>Black</td>
+<td>Alabama</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div id="cell-4" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Gender Distribution:'</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ipums[<span class="st">'SEX_LABEL'</span>].value_counts())</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Gender % Distribution:'</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((ipums[<span class="st">'SEX_LABEL'</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>) <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-5" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>zero_wage <span class="op">=</span> ipums[ipums[<span class="st">'INCWAGE'</span>] <span class="op">==</span> <span class="dv">0</span>]</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Records with $0 wage: </span><span class="sc">{</span><span class="bu">len</span>(zero_wage)<span class="sc">:,}</span><span class="ss">'</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Percentage: </span><span class="sc">{</span>(<span class="bu">len</span>(zero_wage) <span class="op">/</span> <span class="bu">len</span>(ipums) <span class="op">*</span> <span class="dv">100</span>)<span class="sc">:.2f}</span><span class="ss">%'</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Gender breakdown of $0 wage:'</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(zero_wage[<span class="st">'SEX_LABEL'</span>].value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-6" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Average wage INCLUDING $0:'</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ipums.groupby(<span class="st">'SEX_LABEL'</span>)[<span class="st">'INCWAGE'</span>].mean().<span class="bu">round</span>(<span class="dv">2</span>))</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Average wage EXCLUDING $0:'</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>ipums_nonzero <span class="op">=</span> ipums[ipums[<span class="st">'INCWAGE'</span>] <span class="op">&gt;</span> <span class="dv">0</span>]</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ipums_nonzero.groupby(<span class="st">'SEX_LABEL'</span>)[<span class="st">'INCWAGE'</span>].mean().<span class="bu">round</span>(<span class="dv">2</span>))</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">Rows remaining after removing $0: </span><span class="sc">{</span><span class="bu">len</span>(ipums_nonzero)<span class="sc">:,}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-2" class="cell" data-execution_count="34">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Summary Statistics:'</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ipums.describe(include<span class="op">=</span><span class="st">'all'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Summary Statistics:</code></pre>
 </div>
-<div id="cell-7" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ipums_clean <span class="op">=</span> ipums[ipums[<span class="st">'INCWAGE'</span>] <span class="op">&gt;</span> <span class="dv">0</span>].copy()</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Clean dataset shape: </span><span class="sc">{</span>ipums_clean<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Removed </span><span class="sc">{</span><span class="bu">len</span>(ipums) <span class="op">-</span> <span class="bu">len</span>(ipums_clean)<span class="sc">:,}</span><span class="ss"> rows with $0 wage'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">SERIAL</th>
+<th data-quarto-table-cell-role="th">PERNUM</th>
+<th data-quarto-table-cell-role="th">SEX</th>
+<th data-quarto-table-cell-role="th">AGE</th>
+<th data-quarto-table-cell-role="th">RACE</th>
+<th data-quarto-table-cell-role="th">STATEFIP</th>
+<th data-quarto-table-cell-role="th">OCC</th>
+<th data-quarto-table-cell-role="th">IND</th>
+<th data-quarto-table-cell-role="th">INCWAGE</th>
+<th data-quarto-table-cell-role="th">PERWT</th>
+<th data-quarto-table-cell-role="th">SEX_LABEL</th>
+<th data-quarto-table-cell-role="th">RACE_LABEL</th>
+<th data-quarto-table-cell-role="th">STATE_NAME</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>1,572,726.00</td>
+<td>1,572,726.00</td>
+<td>1,572,726.00</td>
+<td>1,572,726.00</td>
+<td>1,572,726.00</td>
+<td>1,572,726.00</td>
+<td>1,572,726.00</td>
+<td>1,572,726.00</td>
+<td>1,572,726.00</td>
+<td>1,572,726.00</td>
+<td>1572726</td>
+<td>1572726</td>
+<td>1572726</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">unique</th>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>2</td>
+<td>9</td>
+<td>51</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">top</th>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Male</td>
+<td>White</td>
+<td>California</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">freq</th>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>814215</td>
+<td>1055852</td>
+<td>183678</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>767,369.28</td>
+<td>1.72</td>
+<td>1.48</td>
+<td>44.15</td>
+<td>2.55</td>
+<td>27.85</td>
+<td>3,909.96</td>
+<td>6,393.94</td>
+<td>68,391.03</td>
+<td>106.07</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">std</th>
+<td>443,671.76</td>
+<td>1.00</td>
+<td>0.50</td>
+<td>15.04</td>
+<td>2.61</td>
+<td>16.09</td>
+<td>2,710.91</td>
+<td>2,599.67</td>
+<td>82,490.59</td>
+<td>94.82</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">min</th>
+<td>3,800.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>16.00</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>10.00</td>
+<td>170.00</td>
+<td>0.00</td>
+<td>1.00</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>377,769.25</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>32.00</td>
+<td>1.00</td>
+<td>12.00</td>
+<td>1,555.00</td>
+<td>4,971.00</td>
+<td>24,000.00</td>
+<td>52.00</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>760,904.50</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>44.00</td>
+<td>1.00</td>
+<td>27.00</td>
+<td>3,910.00</td>
+<td>7,380.00</td>
+<td>50,000.00</td>
+<td>78.00</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>1,159,119.75</td>
+<td>2.00</td>
+<td>2.00</td>
+<td>56.00</td>
+<td>3.00</td>
+<td>42.00</td>
+<td>5,510.00</td>
+<td>8,191.00</td>
+<td>85,000.00</td>
+<td>126.00</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">max</th>
+<td>1,531,614.00</td>
+<td>20.00</td>
+<td>2.00</td>
+<td>96.00</td>
+<td>9.00</td>
+<td>56.00</td>
+<td>9,830.00</td>
+<td>9,870.00</td>
+<td>907,000.00</td>
+<td>2,300.00</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div id="cell-8" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>avg_wage <span class="op">=</span> ipums_clean.groupby(<span class="st">'SEX_LABEL'</span>)[<span class="st">'INCWAGE'</span>].mean().reset_index()</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> ax.bar(avg_wage[<span class="st">'SEX_LABEL'</span>], avg_wage[<span class="st">'INCWAGE'</span>],</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>              color<span class="op">=</span>[<span class="st">'tomato'</span>, <span class="st">'steelblue'</span>], edgecolor<span class="op">=</span><span class="st">'black'</span>, width<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Average Wage by Gender (Employed, 2024)'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Gender'</span>)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Average Annual Wage ($)'</span>)</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_major_formatter(plt.FuncFormatter(<span class="kw">lambda</span> x, _: <span class="ss">f'$</span><span class="sc">{</span>x<span class="sc">:,.0f}</span><span class="ss">'</span>))</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bar, val <span class="kw">in</span> <span class="bu">zip</span>(bars, avg_wage[<span class="st">'INCWAGE'</span>]):</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    ax.text(bar.get_x() <span class="op">+</span> bar.get_width()<span class="op">/</span><span class="dv">2</span>, bar.get_height() <span class="op">+</span> <span class="dv">500</span>,</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f'$</span><span class="sc">{</span>val<span class="sc">:,.0f}</span><span class="ss">'</span>, ha<span class="op">=</span><span class="st">'center'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-9" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>clean_path <span class="op">=</span> os.path.expanduser(<span class="st">'~/repoad688-employability-sum26-groupB/data/clean/'</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>os.makedirs(clean_path, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>output_path <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>clean_path<span class="sc">}</span><span class="ss">employed_only_clean.csv'</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>ipums_clean.to_csv(output_path, index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Saved to: </span><span class="sc">{</span>output_path<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Shape: </span><span class="sc">{</span>ipums_clean<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-3" class="cell" data-execution_count="35">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>missing <span class="op">=</span> ipums.isnull().<span class="bu">sum</span>()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>missing_pct <span class="op">=</span> (missing <span class="op">/</span> <span class="bu">len</span>(ipums) <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>missing_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Missing Count'</span>: missing,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Missing %'</span>: missing_pct</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>}).query(<span class="st">'`Missing Count` &gt; 0'</span>).sort_values(<span class="st">'Missing %'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Columns with missing values: </span><span class="sc">{</span><span class="bu">len</span>(missing_df)<span class="sc">}</span><span class="ss"> of </span><span class="sc">{</span>ipums<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>missing_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Columns with missing values: 0 of 13</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Missing Count</th>
+<th data-quarto-table-cell-role="th">Missing %</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cell-4" class="cell" data-execution_count="36">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Gender Distribution:'</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ipums[<span class="st">'SEX_LABEL'</span>].value_counts())</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Gender % Distribution:'</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((ipums[<span class="st">'SEX_LABEL'</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>) <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Gender Distribution:
+SEX_LABEL
+Male      814215
+Female    758511
+Name: count, dtype: int64
+
+Gender % Distribution:
+SEX_LABEL
+Male     51.77
+Female   48.23
+Name: proportion, dtype: float64</code></pre>
+</div>
+</div>
+<div id="cell-5" class="cell" data-execution_count="37">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>zero_wage <span class="op">=</span> ipums[ipums[<span class="st">'INCWAGE'</span>] <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Records with $0 wage: </span><span class="sc">{</span><span class="bu">len</span>(zero_wage)<span class="sc">:,}</span><span class="ss">'</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Percentage: </span><span class="sc">{</span>(<span class="bu">len</span>(zero_wage) <span class="op">/</span> <span class="bu">len</span>(ipums) <span class="op">*</span> <span class="dv">100</span>)<span class="sc">:.2f}</span><span class="ss">%'</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Gender breakdown of $0 wage:'</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(zero_wage[<span class="st">'SEX_LABEL'</span>].value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Records with $0 wage: 85,178
+Percentage: 5.42%
+
+Gender breakdown of $0 wage:
+SEX_LABEL
+Male      49117
+Female    36061
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<div id="cell-6" class="cell" data-execution_count="38">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Average wage INCLUDING $0:'</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ipums.groupby(<span class="st">'SEX_LABEL'</span>)[<span class="st">'INCWAGE'</span>].mean().<span class="bu">round</span>(<span class="dv">2</span>))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Average wage EXCLUDING $0:'</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>ipums_nonzero <span class="op">=</span> ipums[ipums[<span class="st">'INCWAGE'</span>] <span class="op">&gt;</span> <span class="dv">0</span>]</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ipums_nonzero.groupby(<span class="st">'SEX_LABEL'</span>)[<span class="st">'INCWAGE'</span>].mean().<span class="bu">round</span>(<span class="dv">2</span>))</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">Rows remaining after removing $0: </span><span class="sc">{</span><span class="bu">len</span>(ipums_nonzero)<span class="sc">:,}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Average wage INCLUDING $0:
+SEX_LABEL
+Female   56,730.36
+Male     79,253.95
+Name: INCWAGE, dtype: float64
+
+Average wage EXCLUDING $0:
+SEX_LABEL
+Female   59,562.05
+Male     84,341.82
+Name: INCWAGE, dtype: float64
+
+Rows remaining after removing $0: 1,487,548</code></pre>
+</div>
+</div>
+<div id="cell-7" class="cell" data-execution_count="39">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ipums_clean <span class="op">=</span> ipums[ipums[<span class="st">'INCWAGE'</span>] <span class="op">&gt;</span> <span class="dv">0</span>].copy()</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Clean dataset shape: </span><span class="sc">{</span>ipums_clean<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Removed </span><span class="sc">{</span><span class="bu">len</span>(ipums) <span class="op">-</span> <span class="bu">len</span>(ipums_clean)<span class="sc">:,}</span><span class="ss"> rows with $0 wage'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Clean dataset shape: (1487548, 13)
+Removed 85,178 rows with $0 wage</code></pre>
+</div>
+</div>
+<div id="cell-8" class="cell" data-execution_count="40">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>avg_wage <span class="op">=</span> ipums_clean.groupby(<span class="st">'SEX_LABEL'</span>)[<span class="st">'INCWAGE'</span>].mean().reset_index()</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> ax.bar(avg_wage[<span class="st">'SEX_LABEL'</span>], avg_wage[<span class="st">'INCWAGE'</span>],</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>              color<span class="op">=</span>[<span class="st">'tomato'</span>, <span class="st">'steelblue'</span>], edgecolor<span class="op">=</span><span class="st">'black'</span>, width<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Average Wage by Gender (Employed, 2024)'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Gender'</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Average Annual Wage ($)'</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_major_formatter(plt.FuncFormatter(<span class="kw">lambda</span> x, _: <span class="ss">f'$</span><span class="sc">{</span>x<span class="sc">:,.0f}</span><span class="ss">'</span>))</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bar, val <span class="kw">in</span> <span class="bu">zip</span>(bars, avg_wage[<span class="st">'INCWAGE'</span>]):</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    ax.text(bar.get_x() <span class="op">+</span> bar.get_width()<span class="op">/</span><span class="dv">2</span>, bar.get_height() <span class="op">+</span> <span class="dv">500</span>,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f'$</span><span class="sc">{</span>val<span class="sc">:,.0f}</span><span class="ss">'</span>, ha<span class="op">=</span><span class="st">'center'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_exploration_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-9" class="cell" data-execution_count="41">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>clean_path <span class="op">=</span> os.path.expanduser(<span class="st">'~/repoad688-employability-sum26-groupB/data/clean/'</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>os.makedirs(clean_path, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>output_path <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>clean_path<span class="sc">}</span><span class="ss">employed_only_clean.csv'</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>ipums_clean.to_csv(output_path, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Saved to: </span><span class="sc">{</span>output_path<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Shape: </span><span class="sc">{</span>ipums_clean<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saved to: /home/ubuntu/repoad688-employability-sum26-groupB/data/clean/employed_only_clean.csv
+Shape: (1487548, 13)</code></pre>
+</div>
 </div>
 
 
