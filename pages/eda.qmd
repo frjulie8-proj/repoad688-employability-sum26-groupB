@@ -87,3 +87,58 @@ fig_a2 = px.choropleth(
 save_fig(fig_a2, "julie_gender_wage_state")
 fig_a2.show()
 ```
+
+---
+
+## Julie: Job Market Trends (Lightcast)
+
+### Setup
+
+```{python}
+from analysis.utils import load_job_postings, load_location, save_fig
+import plotly.express as px
+
+df_jobs = load_job_postings()
+print(f"Job postings: {len(df_jobs):,} | Columns: {list(df_jobs.columns)}")
+```
+
+### B1 — Posting Trend Over Time
+
+```{python}
+agg_trend = (df_jobs.groupby(["POSTED_MONTH", "EMPLOYMENT_TYPE_NAME"])
+             .size().reset_index(name="COUNT"))
+
+fig_b1 = px.line(
+    agg_trend, x="POSTED_MONTH", y="COUNT",
+    color="EMPLOYMENT_TYPE_NAME",
+    title="Job Postings Over Time by Employment Type",
+    labels={"POSTED_MONTH": "Month", "COUNT": "Postings",
+            "EMPLOYMENT_TYPE_NAME": "Employment Type"},
+    **PLOTLY_THEME
+)
+fig_b1.update_xaxes(tickangle=45)
+save_fig(fig_b1, "julie_postings_trend")
+fig_b1.show()
+```
+
+### B2 — Postings by State
+
+```{python}
+df_loc = load_location()
+df_jobs_state = (df_jobs
+    .merge(df_loc[["ID", "STATE_CODE"]], on="ID", how="left")
+    .dropna(subset=["STATE_CODE"]))
+
+agg_state = (df_jobs_state.groupby("STATE_CODE")
+             .size().reset_index(name="POSTING_COUNT")
+             .sort_values("POSTING_COUNT", ascending=False))
+
+fig_b2 = px.bar(
+    agg_state, x="STATE_CODE", y="POSTING_COUNT",
+    title="Job Postings by State",
+    labels={"STATE_CODE": "State", "POSTING_COUNT": "Postings"},
+    **PLOTLY_THEME
+)
+save_fig(fig_b2, "julie_postings_by_state")
+fig_b2.show()
+```

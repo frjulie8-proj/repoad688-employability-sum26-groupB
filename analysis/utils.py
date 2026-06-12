@@ -67,6 +67,7 @@ def load_job_postings() -> pd.DataFrame:
     df["POSTED"] = pd.to_datetime(df["POSTED"], errors="coerce")
     df = df.dropna(subset=["POSTED"])
     df["REMOTE_TYPE_NAME"] = df["REMOTE_TYPE_NAME"].replace("[None]", "Not Specified")
+    df["EMPLOYMENT_TYPE_NAME"] = df["EMPLOYMENT_TYPE_NAME"].str.replace("â\u2030¤", "≤", regex=False)
     df["POSTED_MONTH"] = df["POSTED"].dt.to_period("M").astype(str)
     return df
 
