@@ -175,6 +175,13 @@
     "text": "Alina: Salary Analysis from Lightcast\nThis section analyzes salary information from Lightcast job postings. The salary table contains 72,498 job postings, but only 32,398 postings include salary information, meaning approximately 55.3% of postings do not disclose salary fields.\n\nThe salary distribution shows that most postings with disclosed salary information cluster below the highest-paying outliers. The median lower-bound salary is approximately $88,000, while the mean is about $94,005, suggesting a right-skewed distribution.\n\nThe boxplot confirms that salary postings contain substantial high-end outliers. This suggests that salary transparency and compensation levels vary widely across job postings and occupational categories."
   },
   {
+    "objectID": "pages/eda.html#alina-ipums-industry-distribution-analysis",
+    "href": "pages/eda.html#alina-ipums-industry-distribution-analysis",
+    "title": "Exploratory Analysis",
+    "section": "Alina: IPUMS Industry Distribution Analysis",
+    "text": "Alina: IPUMS Industry Distribution Analysis\nThe IPUMS dataset contains 264 industry categories.\n\nThe histogram illustrates the distribution of industry codes across the lookup table."
+  },
+  {
     "objectID": "analysis/eda_exploration.html",
     "href": "analysis/eda_exploration.html",
     "title": "Job Market Analysis 2024",
