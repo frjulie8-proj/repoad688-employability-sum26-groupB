@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Skill Gap Analysis – Job Market Analysis 2024</title>
+<title>EDA: Industry and Household Tables – Job Market Analysis 2024</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -105,6 +105,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -143,7 +146,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Exploratory Analysis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../pages/skill_gap_analysis.html" aria-current="page"> 
+    <a class="nav-link" href="../pages/skill_gap_analysis.html"> 
 <span class="menu-text">Skill Gap Analysis</span></a>
   </li>  
   <li class="nav-item">
@@ -170,15 +173,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#team-skill-levels" id="toc-team-skill-levels" class="nav-link" data-scroll-target="#team-skill-levels">Team Skill Levels</a></li>
-  <li><a href="#skill-heatmap" id="toc-skill-heatmap" class="nav-link" data-scroll-target="#skill-heatmap">Skill Heatmap</a></li>
-  <li><a href="#top-in-demand-skills-from-lightcast-job-postings" id="toc-top-in-demand-skills-from-lightcast-job-postings" class="nav-link" data-scroll-target="#top-in-demand-skills-from-lightcast-job-postings">Top In-Demand Skills from Lightcast Job Postings</a></li>
-  <li><a href="#team-average-vs-industry-requirements" id="toc-team-average-vs-industry-requirements" class="nav-link" data-scroll-target="#team-average-vs-industry-requirements">Team Average vs Industry Requirements</a></li>
-  <li><a href="#improvement-plan" id="toc-improvement-plan" class="nav-link" data-scroll-target="#improvement-plan">Improvement Plan</a>
-  <ul class="collapse">
-  <li><a href="#team-collaboration-plan" id="toc-team-collaboration-plan" class="nav-link" data-scroll-target="#team-collaboration-plan">Team Collaboration Plan</a></li>
-  </ul></li>
+  <li><a href="#plot-1-top-industries-by-job-postings" id="toc-plot-1-top-industries-by-job-postings" class="nav-link active" data-scroll-target="#plot-1-top-industries-by-job-postings">Plot 1: Top Industries by Job Postings</a></li>
+  <li><a href="#plot-2-top-states-by-household-count" id="toc-plot-2-top-states-by-household-count" class="nav-link" data-scroll-target="#plot-2-top-states-by-household-count">Plot 2: Top States by Household Count</a></li>
+  <li><a href="#correlation-check" id="toc-correlation-check" class="nav-link" data-scroll-target="#correlation-check">Correlation Check</a></li>
   </ul>
 </nav>
     </div>
@@ -187,7 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Skill Gap Analysis</h1>
+<h1 class="title">EDA: Industry and Household Tables</h1>
 </div>
 
 
@@ -204,196 +201,218 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This section compares the most in-demand skills from Lightcast 2024 IT job postings against the actual skills of our group members to identify knowledge gaps and areas for improvement.</p>
-<p>Proficiency scale: <strong>1 = Beginner → 5 = Expert</strong></p>
-<hr>
-</section>
-<section id="team-skill-levels" class="level2">
-<h2 class="anchored" data-anchor-id="team-skill-levels">Team Skill Levels</h2>
-<div id="368aae32" class="cell" data-execution_count="1">
+<p>This notebook explores two cleaned tables: <code>lightcast_industry_clean.csv</code> and <code>household_clean.csv</code>.</p>
+<p>The analysis supports the group research questions:</p>
+<ol type="1">
+<li>How do hiring patterns differ for men vs.&nbsp;women across industries?</li>
+<li>Do gender-based employment disparities vary between red and blue states?</li>
+</ol>
+<p>At this stage, the industry table is used to understand hiring demand by industry, while the household table is used to examine the state-level distribution of household records.</p>
+<div id="db1d47d8" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Shared Plotly theme — must match eda.qmd</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>PLOTLY_THEME <span class="op">=</span> <span class="bu">dict</span>(</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span><span class="st">"plotly_white"</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    font<span class="op">=</span><span class="bu">dict</span>(family<span class="op">=</span><span class="st">"Arial"</span>, size<span class="op">=</span><span class="dv">13</span>),</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    title_font<span class="op">=</span><span class="bu">dict</span>(size<span class="op">=</span><span class="dv">16</span>, color<span class="op">=</span><span class="st">"#2c3e50"</span>),</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    colorway<span class="op">=</span>[<span class="st">"#2c7bb6"</span>, <span class="st">"#d7191c"</span>, <span class="st">"#fdae61"</span>, <span class="st">"#1a9641"</span>]</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Yifan, Zhiyang, Alina — fill in your own row before final submission</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>skills_data <span class="op">=</span> {</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Name"</span>:               [<span class="st">"Antara"</span>, <span class="st">"Julie"</span>, <span class="st">"Yifan"</span>, <span class="st">"Zhiyang"</span>, <span class="st">"Alina"</span>],</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Python"</span>:             [<span class="dv">3</span>,         <span class="dv">3</span>,       <span class="dv">0</span>,        <span class="dv">3</span>,         <span class="dv">3</span>],</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SQL"</span>:                [<span class="dv">4</span>,         <span class="dv">3</span>,       <span class="dv">0</span>,        <span class="dv">3</span>,         <span class="dv">3</span>],</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Machine Learning"</span>:   [<span class="dv">2</span>,         <span class="dv">2</span>,       <span class="dv">0</span>,        <span class="dv">2</span>,         <span class="dv">1</span>],</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"AWS"</span>:                [<span class="dv">2</span>,         <span class="dv">2</span>,       <span class="dv">0</span>,        <span class="dv">5</span>,         <span class="dv">2</span>],</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Data Visualization"</span>: [<span class="dv">4</span>,         <span class="dv">5</span>,       <span class="dv">0</span>,        <span class="dv">3</span>,         <span class="dv">4</span>],</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Statistics"</span>:         [<span class="dv">2</span>,         <span class="dv">3</span>,       <span class="dv">0</span>,        <span class="dv">2</span>,         <span class="dv">2</span>],</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Big Data / Spark"</span>:   [<span class="dv">2</span>,         <span class="dv">2</span>,       <span class="dv">0</span>,        <span class="dv">2</span>,         <span class="dv">2</span>],</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Excel"</span>:              [<span class="dv">4</span>,         <span class="dv">4</span>,       <span class="dv">0</span>,        <span class="dv">5</span>,         <span class="dv">3</span>],</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Business Analytics"</span>: [<span class="dv">4</span>,         <span class="dv">4</span>,       <span class="dv">0</span>,        <span class="dv">4</span>,         <span class="dv">4</span>],</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>df_skills <span class="op">=</span> pd.DataFrame(skills_data).set_index(<span class="st">"Name"</span>)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>df_skills</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>industry <span class="op">=</span> pd.read_csv(<span class="st">"../data/processed/lightcast_industry_clean.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>household <span class="op">=</span> pd.read_csv(<span class="st">"../data/processed/household_clean.csv"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Industry shape:"</span>, industry.shape)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Household shape:"</span>, household.shape)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>display(industry.head())</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>display(household.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Industry shape: (72477, 3)
+Household shape: (1348323, 4)</code></pre>
 </div>
-<hr>
-</section>
-<section id="skill-heatmap" class="level2">
-<h2 class="anchored" data-anchor-id="skill-heatmap">Skill Heatmap</h2>
-<div id="30c5a472" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>os.makedirs(<span class="st">"assets/figures"</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.imshow(</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    df_skills,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    text_auto<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    color_continuous_scale<span class="op">=</span><span class="st">"RdYlGn"</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    zmin<span class="op">=</span><span class="dv">0</span>, zmax<span class="op">=</span><span class="dv">5</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    aspect<span class="op">=</span><span class="st">"auto"</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Team Skill Levels (1=Beginner, 5=Expert)"</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span><span class="st">"plotly_white"</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>fig.update_layout(</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    font<span class="op">=</span>PLOTLY_THEME[<span class="st">"font"</span>],</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    title_font<span class="op">=</span>PLOTLY_THEME[<span class="st">"title_font"</span>],</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    xaxis_title<span class="op">=</span><span class="st">"Skill"</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    yaxis_title<span class="op">=</span><span class="st">"Team Member"</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>fig.write_image(<span class="st">"assets/figures/skill_heatmap.png"</span>, width<span class="op">=</span><span class="dv">1100</span>, height<span class="op">=</span><span class="dv">500</span>, scale<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../assets/figures/skill_heatmap.png" class="img-fluid figure-img"></p>
-<figcaption>Team Skill Heatmap</figcaption>
-</figure>
-</div>
-<hr>
-</section>
-<section id="top-in-demand-skills-from-lightcast-job-postings" class="level2">
-<h2 class="anchored" data-anchor-id="top-in-demand-skills-from-lightcast-job-postings">Top In-Demand Skills from Lightcast Job Postings</h2>
-<div id="d0326777" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read pre-computed top skills from ETL output — no raw data loaded here</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_top_skills <span class="op">=</span> pd.read_csv(<span class="st">"../data/processed/lightcast_top_skills.csv"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_top_skills</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<hr>
-</section>
-<section id="team-average-vs-industry-requirements" class="level2">
-<h2 class="anchored" data-anchor-id="team-average-vs-industry-requirements">Team Average vs Industry Requirements</h2>
-<div id="bdc21865" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>skill_map <span class="op">=</span> {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SQL (Programming Language)"</span>:   <span class="st">"SQL"</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Python (Programming Language)"</span>: <span class="st">"Python"</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Data Analysis"</span>:                <span class="st">"Data Visualization"</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Microsoft Excel"</span>:              <span class="st">"Excel"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SAP Applications"</span>:             <span class="st">"Business Analytics"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>max_count <span class="op">=</span> df_top_skills[<span class="st">"Count"</span>].<span class="bu">max</span>()</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>industry_exp <span class="op">=</span> {}</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _, row <span class="kw">in</span> df_top_skills.iterrows():</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    mapped <span class="op">=</span> skill_map.get(row[<span class="st">"Skill"</span>])</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> mapped <span class="kw">and</span> mapped <span class="kw">in</span> df_skills.columns:</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        industry_exp[mapped] <span class="op">=</span> <span class="bu">round</span>((row[<span class="st">"Count"</span>] <span class="op">/</span> max_count) <span class="op">*</span> <span class="dv">5</span>, <span class="dv">1</span>)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> skill <span class="kw">in</span> df_skills.columns:</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> skill <span class="kw">not</span> <span class="kw">in</span> industry_exp:</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        industry_exp[skill] <span class="op">=</span> <span class="fl">3.0</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>team_avg <span class="op">=</span> df_skills.mean().<span class="bu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>gap_df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Team Average"</span>:         team_avg,</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Industry Expectation"</span>: pd.Series(industry_exp),</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>}).reset_index().rename(columns<span class="op">=</span>{<span class="st">"index"</span>: <span class="st">"Skill"</span>})</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>gap_df[<span class="st">"Gap"</span>] <span class="op">=</span> (gap_df[<span class="st">"Industry Expectation"</span>] <span class="op">-</span> gap_df[<span class="st">"Team Average"</span>]).<span class="bu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>gap_df <span class="op">=</span> gap_df.sort_values(<span class="st">"Gap"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>fig2 <span class="op">=</span> go.Figure()</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>fig2.add_trace(go.Bar(name<span class="op">=</span><span class="st">"Team Average"</span>, x<span class="op">=</span>gap_df[<span class="st">"Skill"</span>], y<span class="op">=</span>gap_df[<span class="st">"Team Average"</span>], marker_color<span class="op">=</span><span class="st">"#2c7bb6"</span>))</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>fig2.add_trace(go.Bar(name<span class="op">=</span><span class="st">"Industry Expectation"</span>, x<span class="op">=</span>gap_df[<span class="st">"Skill"</span>], y<span class="op">=</span>gap_df[<span class="st">"Industry Expectation"</span>], marker_color<span class="op">=</span><span class="st">"#d7191c"</span>))</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>fig2.update_layout(</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    barmode<span class="op">=</span><span class="st">"group"</span>,</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Team Skills vs Industry Expectations (sourced from Lightcast)"</span>,</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    xaxis_title<span class="op">=</span><span class="st">"Skill"</span>,</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    yaxis_title<span class="op">=</span><span class="st">"Proficiency Level (1-5)"</span>,</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    yaxis<span class="op">=</span><span class="bu">dict</span>(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>, <span class="fl">5.5</span>]),</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="bu">dict</span>(orientation<span class="op">=</span><span class="st">"h"</span>, y<span class="op">=-</span><span class="fl">0.2</span>),</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    font<span class="op">=</span>PLOTLY_THEME[<span class="st">"font"</span>],</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    title_font<span class="op">=</span>PLOTLY_THEME[<span class="st">"title_font"</span>],</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span>PLOTLY_THEME[<span class="st">"template"</span>]</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>fig2.write_image(<span class="st">"assets/figures/skill_gap_bar.png"</span>, width<span class="op">=</span><span class="dv">1100</span>, height<span class="op">=</span><span class="dv">550</span>, scale<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>fig2.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../assets/figures/skill_gap_bar.png" class="img-fluid figure-img"></p>
-<figcaption>Skill Gap Bar Chart</figcaption>
-</figure>
-</div>
-<hr>
-</section>
-<section id="improvement-plan" class="level2">
-<h2 class="anchored" data-anchor-id="improvement-plan">Improvement Plan</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
-<th>Team Member</th>
-<th>Priority Skills</th>
-<th>Recommended Resources</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">ID</th>
+<th data-quarto-table-cell-role="th">NAICS_2022_6</th>
+<th data-quarto-table-cell-role="th">NAICS_2022_6_NAME</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Antara</td>
-<td>Machine Learning, Statistics</td>
-<td>Coursera ML, Khan Academy Stats</td>
+<th data-quarto-table-cell-role="th">0</th>
+<td>1f57d95acf4dc67ed2819eb12f049f6a5c11782c</td>
+<td>441330.0</td>
+<td>Automotive Parts and Accessories Retailers</td>
 </tr>
 <tr class="even">
-<td>Julie</td>
-<td>Machine Learning, AWS</td>
-<td>fast.ai, AWS Training</td>
+<th data-quarto-table-cell-role="th">1</th>
+<td>0cb072af26757b6c4ea9464472a50a443af681ac</td>
+<td>561320.0</td>
+<td>Temporary Help Services</td>
 </tr>
 <tr class="odd">
-<td>Yifan</td>
-<td>TBD</td>
-<td>TBD</td>
+<th data-quarto-table-cell-role="th">2</th>
+<td>85318b12b3331fa490d32ad014379df01855c557</td>
+<td>524291.0</td>
+<td>Claims Adjusting</td>
 </tr>
 <tr class="even">
-<td>Zhiyang</td>
-<td>TBD</td>
-<td>TBD</td>
+<th data-quarto-table-cell-role="th">3</th>
+<td>1b5c3941e54a1889ef4f8ae55b401a550708a310</td>
+<td>522110.0</td>
+<td>Commercial Banking</td>
 </tr>
 <tr class="odd">
-<td>Alina</td>
-<td>Machine Learning, Advanced SQL</td>
-<td>Coursera ML, Mode SQL Tutorial</td>
+<th data-quarto-table-cell-role="th">4</th>
+<td>cb5ca25f02bdf25c13edfede7931508bfd9e858f</td>
+<td>999999.0</td>
+<td>Unclassified Industry</td>
 </tr>
 </tbody>
 </table>
-<section id="team-collaboration-plan" class="level3">
-<h3 class="anchored" data-anchor-id="team-collaboration-plan">Team Collaboration Plan</h3>
-<ul>
-<li><strong>Antara</strong> leads: Data Cleaning, SQL, Business Analytics, Excel</li>
-<li><strong>Julie</strong> leads: Data Visualization, EDA</li>
-<li><strong>Yifan</strong> leads: TBD</li>
-<li><strong>Zhiyang</strong> leads: TBD</li>
-<li><strong>Alina</strong> leads: Skill Gap Analysis, Career Strategy, Insights &amp; Presentation</li>
-</ul>
+
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
 
 
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">SERIAL</th>
+<th data-quarto-table-cell-role="th">STATEFIP</th>
+<th data-quarto-table-cell-role="th">STATE_NAME</th>
+<th data-quarto-table-cell-role="th">HHWT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>3800</td>
+<td>1</td>
+<td>Alabama</td>
+<td>11.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>3801</td>
+<td>1</td>
+<td>Alabama</td>
+<td>61.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>3802</td>
+<td>1</td>
+<td>Alabama</td>
+<td>67.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>3803</td>
+<td>1</td>
+<td>Alabama</td>
+<td>199.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>3804</td>
+<td>1</td>
+<td>Alabama</td>
+<td>68.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<section id="plot-1-top-industries-by-job-postings" class="level2">
+<h2 class="anchored" data-anchor-id="plot-1-top-industries-by-job-postings">Plot 1: Top Industries by Job Postings</h2>
+<p>This plot shows the top 10 industries with the largest number of job postings in the Lightcast data. Since each row represents an industry classification linked to a job posting ID, counting records by <code>NAICS_2022_6_NAME</code> gives us a measure of hiring demand across industries.</p>
+<p>This plot helps answer the first research question by identifying which industries have the strongest hiring demand before comparing gender representation across industries.</p>
+<div id="f9070cb2" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>top_industries <span class="op">=</span> industry[<span class="st">"NAICS_2022_6_NAME"</span>].value_counts().head(<span class="dv">10</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>top_industries.plot(kind<span class="op">=</span><span class="st">"bar"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Top 10 Industries by Job Postings"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Industry"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Job Postings"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">"right"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_zhiyang_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
+<section id="plot-2-top-states-by-household-count" class="level2">
+<h2 class="anchored" data-anchor-id="plot-2-top-states-by-household-count">Plot 2: Top States by Household Count</h2>
+<p>This plot shows the top 10 states with the largest number of household records in the household table. The variable <code>STATE_NAME</code> identifies the state for each household record.</p>
+<p>This plot provides a state-level baseline for the second research question, which asks whether gender-based employment disparities vary between red and blue states. Before comparing employment disparities by political state category, it is useful to understand which states contribute the largest number of household observations.</p>
+<div id="719f4c57" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>top_states <span class="op">=</span> household[<span class="st">"STATE_NAME"</span>].value_counts().head(<span class="dv">10</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>top_states.plot(kind<span class="op">=</span><span class="st">"bar"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Top 10 States by Household Count"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"State"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Household Records"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">"right"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_zhiyang_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="correlation-check" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-check">Correlation Check</h2>
+<p>The household table contains two numeric variables: <code>STATEFIP</code> and <code>HHWT</code>. We compute their correlation as a basic numeric check. However, <code>STATEFIP</code> is a categorical state identifier rather than a true continuous variable, so this correlation should not be interpreted as a meaningful causal or economic relationship.</p>
+<div id="46305a33" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>household[[<span class="st">"STATEFIP"</span>, <span class="st">"HHWT"</span>]].corr()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">STATEFIP</th>
+<th data-quarto-table-cell-role="th">HHWT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">STATEFIP</th>
+<td>1.000000</td>
+<td>0.000953</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">HHWT</th>
+<td>0.000953</td>
+<td>1.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
