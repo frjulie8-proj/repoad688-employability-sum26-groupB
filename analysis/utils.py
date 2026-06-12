@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 from pathlib import Path
 
 # ── 2. PATHS ──────────────────────────────────
-BASE = Path("/home/ubuntu/repoad688-employability-sum26-groupB")
+BASE = Path(__file__).resolve().parent.parent
 PROCESSED = BASE / "data" / "processed"
 FIGURES   = BASE / "assets" / "figures"
 
