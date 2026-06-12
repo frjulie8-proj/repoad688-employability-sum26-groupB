@@ -85,6 +85,34 @@ def load_location() -> pd.DataFrame:
 # Teammates add their own load_*() here
 # Follow same pattern: _base_load() + specific cleaning
 
+
+# ── 10. build_cross_state() — Julie ───────────────────
+_STATE_ABBREV = {
+    "Alabama":"AL","Alaska":"AK","Arizona":"AZ","Arkansas":"AR","California":"CA",
+    "Colorado":"CO","Connecticut":"CT","Delaware":"DE","District of Columbia":"DC",
+    "Florida":"FL","Georgia":"GA","Hawaii":"HI","Idaho":"ID","Illinois":"IL",
+    "Indiana":"IN","Iowa":"IA","Kansas":"KS","Kentucky":"KY","Louisiana":"LA",
+    "Maine":"ME","Maryland":"MD","Massachusetts":"MA","Michigan":"MI","Minnesota":"MN",
+    "Mississippi":"MS","Missouri":"MO","Montana":"MT","Nebraska":"NE","Nevada":"NV",
+    "New Hampshire":"NH","New Jersey":"NJ","New Mexico":"NM","New York":"NY",
+    "North Carolina":"NC","North Dakota":"ND","Ohio":"OH","Oklahoma":"OK","Oregon":"OR",
+    "Pennsylvania":"PA","Rhode Island":"RI","South Carolina":"SC","South Dakota":"SD",
+    "Tennessee":"TN","Texas":"TX","Utah":"UT","Vermont":"VT","Virginia":"VA",
+    "Washington":"WA","West Virginia":"WV","Wisconsin":"WI","Wyoming":"WY"
+}
+
+def build_cross_state(df_emp: pd.DataFrame, df_jobs_state: pd.DataFrame) -> pd.DataFrame:
+    """Merge IPUMS wage by state+sex with Lightcast posting count by state."""
+    wage = (df_emp.groupby(["STATE_NAME", "SEX_LABEL"])["INCWAGE"]
+            .mean().reset_index()
+            .rename(columns={"INCWAGE": "AVG_WAGE"}))
+    wage["STATE_CODE"] = wage["STATE_NAME"].map(_STATE_ABBREV)
+
+    posting_count = (df_jobs_state.groupby("STATE_CODE")
+                     .size().reset_index(name="POSTING_COUNT"))
+
+    return wage.merge(posting_count, on="STATE_CODE").dropna()
+
 # ── 9. save_fig() ─────────────────────────────
 def save_fig(fig, filename_stem: str) -> None:
     apply_theme(fig)
