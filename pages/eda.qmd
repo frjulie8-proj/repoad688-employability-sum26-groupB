@@ -116,7 +116,7 @@ fig_b1 = px.line(
             "EMPLOYMENT_TYPE_NAME": "Employment Type"},
     **PLOTLY_THEME
 )
-fig_b1.update_xaxes(tickangle=45)
+fig_b1.update_xaxes(type="category", tickangle=45)
 save_fig(fig_b1, "julie_postings_trend")
 fig_b1.show()
 ```
