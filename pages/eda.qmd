@@ -1,52 +1,16 @@
 ---
-title: "Exploratory Analysis"
+title: "Exploratory Data Analysis"
+execute:
+  echo: true
+  eval: true
+  code-fold: true
 ---
 
 ## Overview
 
-Exploratory Data Analysis of the 2024 Lightcast job postings dataset.
-All charts are pre-rendered and saved to `assets/figures/` — no raw data is loaded at render time.
+Exploratory Data Analysis of the 2024 Lightcast job postings and IPUMS employment datasets.
 
 ---
-
-## Salary Distribution
-
-![Salary Distribution](../assets/figures/eda_salary_dist.png)
-
----
-
-## Top Industries by Job Postings
-
-![Top Industries](../assets/figures/eda_top_industries.png)
-
----
-
-## Employment Type Breakdown
-
-![Employment Type](../assets/figures/eda_employment_type.png)
-
----
-
-## Job Postings by State
-
-![Jobs by State](../assets/figures/eda_jobs_by_state.png)
-
----
-
-## Remote vs On-Site Trends
-
-![Remote vs On-Site](../assets/figures/eda_remote_type.png)
-
----
-
-## Education Level Requirements
-
-![Education Requirements](../assets/figures/eda_education.png)
-
----
-
-> Charts generated from `data/processed/lightcast_job_postings_relational.csv` and joined dimension tables.
-> Source code in `eda_generate.py` (run locally before push).
 
 ## Alina: Salary Analysis from Lightcast
 
@@ -60,7 +24,6 @@ The salary distribution shows that most postings with disclosed salary informati
 
 The boxplot confirms that salary postings contain substantial high-end outliers. This suggests that salary transparency and compensation levels vary widely across job postings and occupational categories.
 
-
 ## Alina: IPUMS Industry Distribution Analysis
 
 The IPUMS dataset contains 264 industry categories.
@@ -69,3 +32,58 @@ The IPUMS dataset contains 264 industry categories.
 
 The histogram illustrates the distribution of industry codes across the lookup table.
 
+---
+
+## Julie: Gender & Wages (IPUMS)
+
+### Setup
+
+```{python}
+import sys
+sys.path.insert(0, "..")
+from analysis.utils import load_employment, PLOTLY_THEME, save_fig
+import plotly.express as px
+
+df_emp = load_employment()
+print(f"Rows: {len(df_emp):,} | Columns: {list(df_emp.columns)}")
+```
+
+### Gender Wage Gap by Industry
+
+```{python}
+agg = (df_emp.groupby(["IND", "SEX_LABEL"])["INCWAGE"]
+       .mean().reset_index()
+       .rename(columns={"INCWAGE": "AVG_WAGE"}))
+
+fig_a1 = px.bar(
+    agg, x="AVG_WAGE", y="IND",
+    color="SEX_LABEL", barmode="group",
+    orientation="h",
+    title="Average Wage by Industry and Gender",
+    labels={"AVG_WAGE": "Avg Annual Wage", "IND": "Industry"},
+    **PLOTLY_THEME
+)
+save_fig(fig_a1, "julie_gender_wage_industry")
+fig_a1.show()
+```
+
+### Gender Wage Gap by State
+
+```{python}
+agg_state = (df_emp.groupby(["STATE_NAME", "SEX_LABEL"])["INCWAGE"]
+             .mean().reset_index()
+             .rename(columns={"INCWAGE": "AVG_WAGE"}))
+
+fig_a2 = px.choropleth(
+    agg_state,
+    locations="STATE_NAME",
+    locationmode="USA-states",
+    color="AVG_WAGE",
+    scope="usa",
+    facet_col="SEX_LABEL",
+    title="Average Wage by State and Gender",
+    **PLOTLY_THEME
+)
+save_fig(fig_a2, "julie_gender_wage_state")
+fig_a2.show()
+```
