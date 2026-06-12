@@ -36,11 +36,29 @@ def _base_load(filepath: Path) -> pd.DataFrame:
         df = df.drop_duplicates(subset=["ID"])
     return df
 
+
+# ── 5a. map_ind_to_industry() — Julie ─────────────────
+def map_ind_to_industry(ind_series: pd.Series) -> pd.Series:
+    bins = [0, 290, 490, 770, 3990, 4090, 4590, 4690,
+            5790, 6390, 6470, 6780, 7190, 7580, 7790, 8470,
+            8590, 9290, 9590, 9870, 9999]
+    labels = [
+        "Agriculture", "Mining", "Construction", "Manufacturing",
+        "Wholesale Trade", "Retail Trade", "Transportation", "Information",
+        "Finance & Insurance", "Real Estate", "Professional Services", "Management",
+        "Administrative Services", "Education", "Healthcare",
+        "Arts & Entertainment", "Accommodation & Food", "Other Services",
+        "Public Administration", "Military"
+    ]
+    return pd.cut(ind_series, bins=bins, labels=labels, right=True)
+
 # ── 5. load_employment() — Julie ────────────────
 def load_employment() -> pd.DataFrame:
     df = _base_load(PROCESSED / "employed_only.parquet")
     df = df[df["INCWAGE"] > 0]          # drop zero wages
     df = df.dropna(subset=["SEX_LABEL", "STATE_NAME"])
+    df["INDUSTRY"] = map_ind_to_industry(df["IND"])
+    df = df.dropna(subset=["INDUSTRY"])
     return df
 
 # ── 6. load_job_postings() — Julie ──────────────

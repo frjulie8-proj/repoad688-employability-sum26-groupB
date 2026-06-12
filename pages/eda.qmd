@@ -51,16 +51,16 @@ print(f"Rows: {len(df_emp):,} | Columns: {list(df_emp.columns)}")
 ### Gender Wage Gap by Industry
 
 ```{python}
-agg = (df_emp.groupby(["IND", "SEX_LABEL"])["INCWAGE"]
+agg = (df_emp.groupby(["INDUSTRY", "SEX_LABEL"])["INCWAGE"]
        .mean().reset_index()
        .rename(columns={"INCWAGE": "AVG_WAGE"}))
 
 fig_a1 = px.bar(
-    agg, x="AVG_WAGE", y="IND",
+    agg, x="AVG_WAGE", y="INDUSTRY",
     color="SEX_LABEL", barmode="group",
     orientation="h",
     title="Average Wage by Industry and Gender",
-    labels={"AVG_WAGE": "Avg Annual Wage", "IND": "Industry"},
+    labels={"AVG_WAGE": "Avg Annual Wage", "INDUSTRY": "Industry"},
     **PLOTLY_THEME
 )
 save_fig(fig_a1, "julie_gender_wage_industry")
