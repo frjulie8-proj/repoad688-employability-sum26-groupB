@@ -114,72 +114,37 @@
   {
     "objectID": "pages/eda.html",
     "href": "pages/eda.html",
-    "title": "Exploratory Analysis",
+    "title": "Exploratory Data Analysis",
     "section": "",
-    "text": "Exploratory Data Analysis of the 2024 Lightcast job postings dataset. All charts are pre-rendered and saved to assets/figures/ — no raw data is loaded at render time."
+    "text": "Exploratory Data Analysis of the 2024 Lightcast job postings and IPUMS employment datasets."
   },
   {
     "objectID": "pages/eda.html#overview",
     "href": "pages/eda.html#overview",
-    "title": "Exploratory Analysis",
+    "title": "Exploratory Data Analysis",
     "section": "",
-    "text": "Exploratory Data Analysis of the 2024 Lightcast job postings dataset. All charts are pre-rendered and saved to assets/figures/ — no raw data is loaded at render time."
-  },
-  {
-    "objectID": "pages/eda.html#salary-distribution",
-    "href": "pages/eda.html#salary-distribution",
-    "title": "Exploratory Analysis",
-    "section": "Salary Distribution",
-    "text": "Salary Distribution\n\n\n\nSalary Distribution"
-  },
-  {
-    "objectID": "pages/eda.html#top-industries-by-job-postings",
-    "href": "pages/eda.html#top-industries-by-job-postings",
-    "title": "Exploratory Analysis",
-    "section": "Top Industries by Job Postings",
-    "text": "Top Industries by Job Postings\n\n\n\nTop Industries"
-  },
-  {
-    "objectID": "pages/eda.html#employment-type-breakdown",
-    "href": "pages/eda.html#employment-type-breakdown",
-    "title": "Exploratory Analysis",
-    "section": "Employment Type Breakdown",
-    "text": "Employment Type Breakdown\n\n\n\nEmployment Type"
-  },
-  {
-    "objectID": "pages/eda.html#job-postings-by-state",
-    "href": "pages/eda.html#job-postings-by-state",
-    "title": "Exploratory Analysis",
-    "section": "Job Postings by State",
-    "text": "Job Postings by State\n\n\n\nJobs by State"
-  },
-  {
-    "objectID": "pages/eda.html#remote-vs-on-site-trends",
-    "href": "pages/eda.html#remote-vs-on-site-trends",
-    "title": "Exploratory Analysis",
-    "section": "Remote vs On-Site Trends",
-    "text": "Remote vs On-Site Trends\n\n\n\nRemote vs On-Site"
-  },
-  {
-    "objectID": "pages/eda.html#education-level-requirements",
-    "href": "pages/eda.html#education-level-requirements",
-    "title": "Exploratory Analysis",
-    "section": "Education Level Requirements",
-    "text": "Education Level Requirements\n\n\n\nEducation Requirements\n\n\n\n\nCharts generated from data/processed/lightcast_job_postings_relational.csv and joined dimension tables. Source code in eda_generate.py (run locally before push)."
+    "text": "Exploratory Data Analysis of the 2024 Lightcast job postings and IPUMS employment datasets."
   },
   {
     "objectID": "pages/eda.html#alina-salary-analysis-from-lightcast",
     "href": "pages/eda.html#alina-salary-analysis-from-lightcast",
-    "title": "Exploratory Analysis",
+    "title": "Exploratory Data Analysis",
     "section": "Alina: Salary Analysis from Lightcast",
     "text": "Alina: Salary Analysis from Lightcast\nThis section analyzes salary information from Lightcast job postings. The salary table contains 72,498 job postings, but only 32,398 postings include salary information, meaning approximately 55.3% of postings do not disclose salary fields.\n\nThe salary distribution shows that most postings with disclosed salary information cluster below the highest-paying outliers. The median lower-bound salary is approximately $88,000, while the mean is about $94,005, suggesting a right-skewed distribution.\n\nThe boxplot confirms that salary postings contain substantial high-end outliers. This suggests that salary transparency and compensation levels vary widely across job postings and occupational categories."
   },
   {
     "objectID": "pages/eda.html#alina-ipums-industry-distribution-analysis",
     "href": "pages/eda.html#alina-ipums-industry-distribution-analysis",
-    "title": "Exploratory Analysis",
+    "title": "Exploratory Data Analysis",
     "section": "Alina: IPUMS Industry Distribution Analysis",
     "text": "Alina: IPUMS Industry Distribution Analysis\nThe IPUMS dataset contains 264 industry categories.\n\nThe histogram illustrates the distribution of industry codes across the lookup table."
+  },
+  {
+    "objectID": "pages/eda.html#julie-gender-wages-ipums",
+    "href": "pages/eda.html#julie-gender-wages-ipums",
+    "title": "Exploratory Data Analysis",
+    "section": "Julie: Gender & Wages (IPUMS)",
+    "text": "Julie: Gender & Wages (IPUMS)\n\nSetup\n\nimport sys\nsys.path.insert(0, \"..\")\nfrom analysis.utils import load_employment, PLOTLY_THEME, save_fig\nimport plotly.express as px\n\ndf_emp = load_employment()\nprint(f\"Rows: {len(df_emp):,} | Columns: {list(df_emp.columns)}\")\n\nRows: 1,487,548 | Columns: ['SERIAL', 'PERNUM', 'SEX', 'AGE', 'RACE', 'STATEFIP', 'OCC', 'IND', 'INCWAGE', 'PERWT', 'SEX_LABEL', 'RACE_LABEL', 'STATE_NAME']\n\n\n\n\nGender Wage Gap by Industry\n\nagg = (df_emp.groupby([\"IND\", \"SEX_LABEL\"])[\"INCWAGE\"]\n       .mean().reset_index()\n       .rename(columns={\"INCWAGE\": \"AVG_WAGE\"}))\n\nfig_a1 = px.bar(\n    agg, x=\"AVG_WAGE\", y=\"IND\",\n    color=\"SEX_LABEL\", barmode=\"group\",\n    orientation=\"h\",\n    title=\"Average Wage by Industry and Gender\",\n    labels={\"AVG_WAGE\": \"Avg Annual Wage\", \"IND\": \"Industry\"},\n    **PLOTLY_THEME\n)\nsave_fig(fig_a1, \"julie_gender_wage_industry\")\nfig_a1.show()\n\nSaved: julie_gender_wage_industry.html + .png\n\n\n                            \n                                            \n\n\n\n\nGender Wage Gap by State\n\nagg_state = (df_emp.groupby([\"STATE_NAME\", \"SEX_LABEL\"])[\"INCWAGE\"]\n             .mean().reset_index()\n             .rename(columns={\"INCWAGE\": \"AVG_WAGE\"}))\n\nfig_a2 = px.choropleth(\n    agg_state,\n    locations=\"STATE_NAME\",\n    locationmode=\"USA-states\",\n    color=\"AVG_WAGE\",\n    scope=\"usa\",\n    facet_col=\"SEX_LABEL\",\n    title=\"Average Wage by State and Gender\",\n    **PLOTLY_THEME\n)\nsave_fig(fig_a2, \"julie_gender_wage_state\")\nfig_a2.show()\n\nSaved: julie_gender_wage_state.html + .png"
   },
   {
     "objectID": "analysis/eda_exploration.html",
