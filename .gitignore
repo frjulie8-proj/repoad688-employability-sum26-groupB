@@ -18,4 +18,4 @@ data/clean/employed_only.csv
 data/raw/lightcast_2024_new.csv
 data/processed/lightcast_clean.csv
 assets/figures/
-data/processed/
+data/processed/*.csv
