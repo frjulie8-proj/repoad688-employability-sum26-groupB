@@ -60,3 +60,12 @@ The salary distribution shows that most postings with disclosed salary informati
 
 The boxplot confirms that salary postings contain substantial high-end outliers. This suggests that salary transparency and compensation levels vary widely across job postings and occupational categories.
 
+
+## Alina: IPUMS Industry Distribution Analysis
+
+The IPUMS dataset contains 264 industry categories.
+
+![](../assets/figures/alina_industry_distribution.png)
+
+The histogram illustrates the distribution of industry codes across the lookup table.
+
