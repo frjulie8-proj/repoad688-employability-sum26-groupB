@@ -162,3 +162,38 @@ fig_c1.update_traces(marker=dict(size=8), selector=dict(mode="markers"))
 save_fig(fig_c1, "julie_cross_state_comparison")
 fig_c1.show()
 ```
+---
+
+## Antara: Gender Disparities in IT vs Overall Workforce (IPUMS & Lightcast)
+
+This section analyzes gender representation and wage disparities between the overall workforce and the IT workforce, using IPUMS 2024 employment data and Lightcast 2024 job postings.
+
+### Gender Distribution: Overall vs IT Workforce
+
+The IT workforce is significantly male-dominated compared to the overall workforce. While the overall workforce is nearly balanced at 51.8% male and 48.2% female, the IT workforce skews heavily male at 72.4%, with women representing only 27.6% of IT workers.
+
+![](../assets/figures/antara_gender_distribution.png)
+
+### Average Wage by Gender: Overall vs IT Workforce
+
+Both the overall and IT workforces show a clear gender wage gap. In the overall workforce, women earn an average of $59,562 compared to $84,342 for men — a gap of $24,780. In the IT workforce, women earn $96,398 compared to $119,699 for men — a gap of $23,301. While IT offers higher wages for both genders, the wage gap persists.
+
+![](../assets/figures/antara_avg_wage_comparison.png)
+
+### Wage Distribution by Gender: Overall vs IT Workforce
+
+The box plots reveal that the IT workforce has a higher median wage for both genders compared to the overall workforce. However, the gap between male and female median wages remains visible in both groups, with males consistently earning more across all quartiles.
+
+![](../assets/figures/antara_wage_boxplot.png)
+
+### Job Postings by Career Area (Lightcast 2024)
+
+The Lightcast dataset shows that 93% of job postings fall under Information Technology and Computer Science, reinforcing the IT focus of the dataset. Business Management and Operations accounts for 6% of postings.
+
+![](../assets/figures/antara_career_area.png)
+
+### Job Postings by Occupation Group (Lightcast 2024)
+
+Within IT, Data Analysis and Mathematics and Business Intelligence are the two dominant occupation groups, each with approximately 30,000 postings. This suggests high demand for data-related roles in the current job market.
+
+![](../assets/figures/antara_occupation_group.png)
