@@ -176,6 +176,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#wage-gap-by-gender" id="toc-wage-gap-by-gender" class="nav-link active" data-scroll-target="#wage-gap-by-gender">Wage Gap by Gender</a></li>
   <li><a href="#wage-gap-by-state" id="toc-wage-gap-by-state" class="nav-link" data-scroll-target="#wage-gap-by-state">Wage Gap by State</a></li>
   <li><a href="#lightcast---occupation" id="toc-lightcast---occupation" class="nav-link" data-scroll-target="#lightcast---occupation">Lightcast - Occupation</a></li>
+  <li><a href="#visuals-using-plotly" id="toc-visuals-using-plotly" class="nav-link" data-scroll-target="#visuals-using-plotly">Visuals using Plotly</a>
+  <ul class="collapse">
+  <li><a href="#gender-distribution-overall-vs-it" id="toc-gender-distribution-overall-vs-it" class="nav-link" data-scroll-target="#gender-distribution-overall-vs-it">Gender Distribution: Overall vs IT</a></li>
+  <li><a href="#average-wage-by-gender-overall-vs-it" id="toc-average-wage-by-gender-overall-vs-it" class="nav-link" data-scroll-target="#average-wage-by-gender-overall-vs-it">Average Wage by Gender: Overall vs IT</a></li>
+  <li><a href="#box-plot-wage-distribution" id="toc-box-plot-wage-distribution" class="nav-link" data-scroll-target="#box-plot-wage-distribution">Box Plot Wage Distribution</a></li>
+  <li><a href="#lightcast-career-area" id="toc-lightcast-career-area" class="nav-link" data-scroll-target="#lightcast-career-area">Lightcast Career Area</a></li>
+  <li><a href="#lightcast-occupation-group" id="toc-lightcast-occupation-group" class="nav-link" data-scroll-target="#lightcast-occupation-group">Lightcast Occupation Group</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -201,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="cell-1" class="cell" data-execution_count="10">
+<div id="cell-1" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Import Packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -218,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Libraries loaded successfully!</code></pre>
 </div>
 </div>
-<div id="cell-3" class="cell" data-execution_count="11">
+<div id="cell-3" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load IPUMS dataset</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ipums_path <span class="op">=</span> os.path.expanduser(<span class="st">'~/repoad688-employability-sum26-groupB/data/processed/employed_only.csv'</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ipums <span class="op">=</span> pd.read_csv(ipums_path)</span>
@@ -230,7 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 Columns: ['SERIAL', 'PERNUM', 'SEX', 'AGE', 'RACE', 'STATEFIP', 'OCC', 'IND', 'INCWAGE', 'PERWT', 'SEX_LABEL', 'RACE_LABEL', 'STATE_NAME']</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
 
@@ -420,14 +428,14 @@ Columns: ['SERIAL', 'PERNUM', 'SEX', 'AGE', 'RACE', 'STATEFIP', 'OCC', 'IND', 'I
 </div>
 </div>
 </div>
-<div id="cell-4" class="cell" data-execution_count="12">
+<div id="cell-4" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary Statustics</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Summary Statistics:'</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ipums.describe(include<span class="op">=</span><span class="st">'all'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Summary Statistics:</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
 
@@ -633,7 +641,7 @@ Columns: ['SERIAL', 'PERNUM', 'SEX', 'AGE', 'RACE', 'STATEFIP', 'OCC', 'IND', 'I
 </div>
 </div>
 </div>
-<div id="cell-5" class="cell" data-execution_count="13">
+<div id="cell-5" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Handle missing values</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>missing <span class="op">=</span> ipums.isnull().<span class="bu">sum</span>()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>missing_pct <span class="op">=</span> (missing <span class="op">/</span> <span class="bu">len</span>(ipums) <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>)</span>
@@ -646,7 +654,7 @@ Columns: ['SERIAL', 'PERNUM', 'SEX', 'AGE', 'RACE', 'STATEFIP', 'OCC', 'IND', 'I
 <div class="cell-output cell-output-stdout">
 <pre><code>Columns with missing values: 0 of 13</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
 
@@ -667,7 +675,7 @@ Columns: ['SERIAL', 'PERNUM', 'SEX', 'AGE', 'RACE', 'STATEFIP', 'OCC', 'IND', 'I
 </div>
 <section id="wage-gap-by-gender" class="level3">
 <h3 class="anchored" data-anchor-id="wage-gap-by-gender">Wage Gap by Gender</h3>
-<div id="cell-7" class="cell" data-execution_count="14">
+<div id="cell-7" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gender Distribution</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Gender Distribution:'</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ipums[<span class="st">'SEX_LABEL'</span>].value_counts())</span>
@@ -688,7 +696,7 @@ Female   48.23
 Name: proportion, dtype: float64</code></pre>
 </div>
 </div>
-<div id="cell-8" class="cell" data-execution_count="15">
+<div id="cell-8" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Breakdown of $0 wage</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>zero_wage <span class="op">=</span> ipums[ipums[<span class="st">'INCWAGE'</span>] <span class="op">==</span> <span class="dv">0</span>]</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Records with $0 wage: </span><span class="sc">{</span><span class="bu">len</span>(zero_wage)<span class="sc">:,}</span><span class="ss">'</span>)</span>
@@ -707,7 +715,7 @@ Female    36061
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="cell-9" class="cell" data-execution_count="16">
+<div id="cell-9" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Average wage INCLUDING $0:'</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ipums.groupby(<span class="st">'SEX_LABEL'</span>)[<span class="st">'INCWAGE'</span>].mean().<span class="bu">round</span>(<span class="dv">2</span>))</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -731,7 +739,7 @@ Name: INCWAGE, dtype: float64
 Rows remaining after removing $0: 1,487,548</code></pre>
 </div>
 </div>
-<div id="cell-10" class="cell" data-execution_count="17">
+<div id="cell-10" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove $0 wage (outliers)</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ipums_clean <span class="op">=</span> ipums[ipums[<span class="st">'INCWAGE'</span>] <span class="op">&gt;</span> <span class="dv">0</span>].copy()</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Clean dataset shape: </span><span class="sc">{</span>ipums_clean<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
@@ -741,7 +749,7 @@ Rows remaining after removing $0: 1,487,548</code></pre>
 Removed 85,178 rows with $0 wage</code></pre>
 </div>
 </div>
-<div id="cell-11" class="cell" data-execution_count="18">
+<div id="cell-11" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visulaize wage gap by gender</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>avg_wage <span class="op">=</span> ipums_clean.groupby(<span class="st">'SEX_LABEL'</span>)[<span class="st">'INCWAGE'</span>].mean().reset_index()</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -768,7 +776,7 @@ Removed 85,178 rows with $0 wage</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-12" class="cell" data-execution_count="19">
+<div id="cell-12" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>clean_path <span class="op">=</span> os.path.expanduser(<span class="st">'~/repoad688-employability-sum26-groupB/data/clean/'</span>)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>os.makedirs(clean_path, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
@@ -785,7 +793,7 @@ Shape: (1487548, 13)</code></pre>
 </section>
 <section id="wage-gap-by-state" class="level3">
 <h3 class="anchored" data-anchor-id="wage-gap-by-state">Wage Gap by State</h3>
-<div id="cell-14" class="cell" data-execution_count="20">
+<div id="cell-14" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wage gap by state</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>state_wage <span class="op">=</span> ipums_clean.groupby([<span class="st">'STATE_NAME'</span>, <span class="st">'SEX_LABEL'</span>])[<span class="st">'INCWAGE'</span>].mean().unstack()</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>state_wage[<span class="st">'GAP'</span>] <span class="op">=</span> state_wage[<span class="st">'Male'</span>] <span class="op">-</span> state_wage[<span class="st">'Female'</span>]</span>
@@ -797,7 +805,7 @@ Shape: (1487548, 13)</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Top 10 states with largest wage gap:</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <div>
 
 
@@ -895,7 +903,7 @@ Shape: (1487548, 13)</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-15" class="cell" data-execution_count="21">
+<div id="cell-15" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 15 states with largest wage gap</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>top15 <span class="op">=</span> state_wage.head(<span class="dv">15</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -924,7 +932,7 @@ Shape: (1487548, 13)</code></pre>
 </section>
 <section id="lightcast---occupation" class="level1">
 <h1>Lightcast - Occupation</h1>
-<div id="cell-17" class="cell" data-execution_count="22">
+<div id="cell-17" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>lc_occ <span class="op">=</span> pd.read_csv(<span class="st">'/home/ubuntu/repoad688-employability-sum26-groupB/data/processed/lightcast_occupation.csv'</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Shape: </span><span class="sc">{</span>lc_occ<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Columns: </span><span class="sc">{</span>lc_occ<span class="sc">.</span>columns<span class="sc">.</span>tolist()<span class="sc">}</span><span class="ss">'</span>)</span>
@@ -933,7 +941,7 @@ Shape: (1487548, 13)</code></pre>
 <pre><code>Shape: (72498, 12)
 Columns: ['ID', 'SOC_2', 'SOC_2_NAME', 'SOC_5', 'SOC_5_NAME', 'ONET', 'ONET_NAME', 'LOT_CAREER_AREA_NAME', 'LOT_V6_CAREER_AREA', 'LOT_V6_CAREER_AREA_NAME', 'LOT_V6_OCCUPATION_GROUP', 'LOT_V6_OCCUPATION_GROUP_NAME']</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 
 
@@ -1112,7 +1120,7 @@ Columns: ['ID', 'SOC_2', 'SOC_2_NAME', 'SOC_5', 'SOC_5_NAME', 'ONET', 'ONET_NAME
 </div>
 </div>
 </div>
-<div id="cell-18" class="cell" data-execution_count="23">
+<div id="cell-18" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check unique values in each column</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Shape: </span><span class="sc">{</span>lc_occ<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">Unique values per column:'</span>)</span>
@@ -1136,7 +1144,7 @@ Unique values per column:
   LOT_V6_OCCUPATION_GROUP_NAME: 6 unique values</code></pre>
 </div>
 </div>
-<div id="cell-19" class="cell" data-execution_count="24">
+<div id="cell-19" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'LOT_V6_CAREER_AREA_NAME values:'</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lc_occ[<span class="st">'LOT_V6_CAREER_AREA_NAME'</span>].value_counts())</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1162,7 +1170,7 @@ Marketing Specialists                153
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="cell-20" class="cell" data-execution_count="25">
+<div id="cell-20" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Missing values check</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>missing <span class="op">=</span> lc_occ.isnull().<span class="bu">sum</span>()</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>missing_pct <span class="op">=</span> (missing <span class="op">/</span> <span class="bu">len</span>(lc_occ) <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>)</span>
@@ -1175,7 +1183,7 @@ Name: count, dtype: int64</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Columns with missing values: 12</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="25">
+<div class="cell-output cell-output-display" data-execution_count="16">
 <div>
 
 
@@ -1254,7 +1262,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-21" class="cell" data-execution_count="26">
+<div id="cell-21" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">6</span>))</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Career Area Distribution</span></span>
@@ -1284,7 +1292,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-22" class="cell" data-execution_count="27">
+<div id="cell-22" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check IPUMS occupation codes</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'IPUMS OCC unique values (sample):'</span>)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ipums_clean[<span class="st">'OCC'</span>].value_counts().head(<span class="dv">10</span>))</span>
@@ -1321,7 +1329,7 @@ IND
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="cell-23" class="cell" data-execution_count="28">
+<div id="cell-23" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check Lightcast SOC codes</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Lightcast SOC_5 unique values:'</span>)</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lc_occ[<span class="st">'SOC_5'</span>].value_counts())</span>
@@ -1345,7 +1353,7 @@ Marketing Specialists                153
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="cell-24" class="cell" data-execution_count="29">
+<div id="cell-24" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># IT-related OCC codes in IPUMS are typically 1000-1999</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>ipums_it <span class="op">=</span> ipums_clean[(ipums_clean[<span class="st">'OCC'</span>] <span class="op">&gt;=</span> <span class="dv">1000</span>) <span class="op">&amp;</span> (ipums_clean[<span class="st">'OCC'</span>] <span class="op">&lt;=</span> <span class="dv">1999</span>)]</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'IT workers in IPUMS: </span><span class="sc">{</span><span class="bu">len</span>(ipums_it)<span class="sc">:,}</span><span class="ss">'</span>)</span>
@@ -1377,7 +1385,7 @@ Male     119,699.34
 Name: INCWAGE, dtype: float64</code></pre>
 </div>
 </div>
-<div id="cell-25" class="cell" data-execution_count="30">
+<div id="cell-25" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare IT vs Overall workforce gender gap</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1423,7 +1431,7 @@ Name: INCWAGE, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-26" class="cell" data-execution_count="34">
+<div id="cell-26" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">7</span>))</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Box plot 1: Overall workforce wage distribution by gender</span></span>
@@ -1463,8 +1471,200 @@ Name: INCWAGE, dtype: float64</code></pre>
 </div>
 </div>
 </div>
+</section>
+<section id="visuals-using-plotly" class="level1">
+<h1>Visuals using Plotly</h1>
+<div id="cell-28" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>FIGURES_DIR <span class="op">=</span> <span class="st">'/home/ubuntu/repoad688-employability-sum26-groupB/assets/figures/'</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> save_fig(fig, name):</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    fig.write_image(<span class="ss">f"</span><span class="sc">{</span>FIGURES_DIR<span class="sc">}{</span>name<span class="sc">}</span><span class="ss">.png"</span>)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Saved </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">.png"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-29" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>FIGURES_DIR <span class="op">=</span> <span class="st">'/home/ubuntu/repoad688-employability-sum26-groupB/assets/figures/'</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> save_fig(fig, name):</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    fig.write_image(<span class="ss">f"</span><span class="sc">{</span>FIGURES_DIR<span class="sc">}{</span>name<span class="sc">}</span><span class="ss">.png"</span>)</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Saved </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">.png"</span>)</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Plotly loaded successfully!'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Plotly loaded successfully!</code></pre>
+</div>
+</div>
+<section id="gender-distribution-overall-vs-it" class="level2">
+<h2 class="anchored" data-anchor-id="gender-distribution-overall-vs-it">Gender Distribution: Overall vs IT</h2>
+<div id="cell-31" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>categories <span class="op">=</span> [<span class="st">'Overall Workforce'</span>, <span class="st">'IT Workforce'</span>]</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>male_pct <span class="op">=</span> [<span class="fl">51.77</span>, <span class="fl">72.42</span>]</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>female_pct <span class="op">=</span> [<span class="fl">48.23</span>, <span class="fl">27.58</span>]</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>fig1 <span class="op">=</span> go.Figure()</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>fig1.add_trace(go.Bar(name<span class="op">=</span><span class="st">'Male'</span>, x<span class="op">=</span>categories, y<span class="op">=</span>male_pct, marker_color<span class="op">=</span><span class="st">'steelblue'</span>))</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>fig1.add_trace(go.Bar(name<span class="op">=</span><span class="st">'Female'</span>, x<span class="op">=</span>categories, y<span class="op">=</span>female_pct, marker_color<span class="op">=</span><span class="st">'tomato'</span>))</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>fig1.update_layout(</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>    barmode<span class="op">=</span><span class="st">'group'</span>,</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Gender Distribution: Overall vs IT Workforce (2024)'</span>,</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>    xaxis_title<span class="op">=</span><span class="st">'Workforce Type'</span>,</span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>    yaxis_title<span class="op">=</span><span class="st">'Percentage (%)'</span>,</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>    legend_title<span class="op">=</span><span class="st">'Gender'</span>,</span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span><span class="st">'plotly_white'</span>,</span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">500</span></span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>save_fig(fig1, <span class="st">'antara_gender_distribution'</span>)</span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a>fig1.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saved antara_gender_distribution.png</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+</section>
+<section id="average-wage-by-gender-overall-vs-it" class="level2">
+<h2 class="anchored" data-anchor-id="average-wage-by-gender-overall-vs-it">Average Wage by Gender: Overall vs IT</h2>
+<div id="cell-33" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>fig2 <span class="op">=</span> go.Figure()</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Overall</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>fig2.add_trace(go.Bar(</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'Overall - Female'</span>, x<span class="op">=</span>[<span class="st">'Overall'</span>], y<span class="op">=</span>[<span class="dv">59562</span>],</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    marker_color<span class="op">=</span><span class="st">'tomato'</span>, offsetgroup<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>fig2.add_trace(go.Bar(</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'Overall - Male'</span>, x<span class="op">=</span>[<span class="st">'Overall'</span>], y<span class="op">=</span>[<span class="dv">84342</span>],</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>    marker_color<span class="op">=</span><span class="st">'steelblue'</span>, offsetgroup<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a><span class="co"># IT</span></span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>fig2.add_trace(go.Bar(</span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'IT - Female'</span>, x<span class="op">=</span>[<span class="st">'IT'</span>], y<span class="op">=</span>[<span class="dv">96398</span>],</span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>    marker_color<span class="op">=</span><span class="st">'tomato'</span>, offsetgroup<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>    showlegend<span class="op">=</span><span class="va">False</span></span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a>fig2.add_trace(go.Bar(</span>
+<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'IT - Male'</span>, x<span class="op">=</span>[<span class="st">'IT'</span>], y<span class="op">=</span>[<span class="dv">119699</span>],</span>
+<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a>    marker_color<span class="op">=</span><span class="st">'steelblue'</span>, offsetgroup<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb46-22"><a href="#cb46-22" aria-hidden="true" tabindex="-1"></a>    showlegend<span class="op">=</span><span class="va">False</span></span>
+<span id="cb46-23"><a href="#cb46-23" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb46-24"><a href="#cb46-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-25"><a href="#cb46-25" aria-hidden="true" tabindex="-1"></a>fig2.update_layout(</span>
+<span id="cb46-26"><a href="#cb46-26" aria-hidden="true" tabindex="-1"></a>    barmode<span class="op">=</span><span class="st">'group'</span>,</span>
+<span id="cb46-27"><a href="#cb46-27" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Average Wage by Gender: Overall vs IT Workforce (2024)'</span>,</span>
+<span id="cb46-28"><a href="#cb46-28" aria-hidden="true" tabindex="-1"></a>    xaxis_title<span class="op">=</span><span class="st">'Workforce Type'</span>,</span>
+<span id="cb46-29"><a href="#cb46-29" aria-hidden="true" tabindex="-1"></a>    yaxis_title<span class="op">=</span><span class="st">'Average Annual Wage ($)'</span>,</span>
+<span id="cb46-30"><a href="#cb46-30" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span><span class="st">'plotly_white'</span>,</span>
+<span id="cb46-31"><a href="#cb46-31" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">500</span></span>
+<span id="cb46-32"><a href="#cb46-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb46-33"><a href="#cb46-33" aria-hidden="true" tabindex="-1"></a>save_fig(fig2, <span class="st">'antara_avg_wage_comparison'</span>)</span>
+<span id="cb46-34"><a href="#cb46-34" aria-hidden="true" tabindex="-1"></a>fig2.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saved antara_avg_wage_comparison.png</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+</section>
+<section id="box-plot-wage-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="box-plot-wage-distribution">Box Plot Wage Distribution</h2>
+<div id="cell-35" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine overall and IT data</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>ipums_clean[<span class="st">'Workforce'</span>] <span class="op">=</span> <span class="st">'Overall'</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>ipums_it_plot <span class="op">=</span> ipums_it.copy()</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>ipums_it_plot[<span class="st">'Workforce'</span>] <span class="op">=</span> <span class="st">'IT'</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>combined <span class="op">=</span> pd.concat([ipums_clean, ipums_it_plot])</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>fig3 <span class="op">=</span> px.box(</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>    combined[combined[<span class="st">'INCWAGE'</span>] <span class="op">&lt;=</span> <span class="dv">300000</span>],</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Workforce'</span>,</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'INCWAGE'</span>,</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'SEX_LABEL'</span>,</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Wage Distribution by Gender: Overall vs IT Workforce (2024)'</span>,</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>{<span class="st">'INCWAGE'</span>: <span class="st">'Annual Wage ($)'</span>, <span class="st">'SEX_LABEL'</span>: <span class="st">'Gender'</span>, <span class="st">'Workforce'</span>: <span class="st">'Workforce Type'</span>},</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>    color_discrete_map<span class="op">=</span>{<span class="st">'Male'</span>: <span class="st">'steelblue'</span>, <span class="st">'Female'</span>: <span class="st">'tomato'</span>},</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span><span class="st">'plotly_white'</span>,</span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">550</span></span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>save_fig(fig3, <span class="st">'antara_wage_boxplot'</span>)</span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>fig3.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saved antara_wage_boxplot.png</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+</section>
+<section id="lightcast-career-area" class="level2">
+<h2 class="anchored" data-anchor-id="lightcast-career-area">Lightcast Career Area</h2>
+<div id="cell-37" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>career_counts <span class="op">=</span> lc_occ[<span class="st">'LOT_V6_CAREER_AREA_NAME'</span>].value_counts().reset_index()</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>career_counts.columns <span class="op">=</span> [<span class="st">'Career Area'</span>, <span class="st">'Count'</span>]</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>fig4 <span class="op">=</span> px.bar(</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>    career_counts,</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Count'</span>,</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'Career Area'</span>,</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>    orientation<span class="op">=</span><span class="st">'h'</span>,</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Job Postings by Career Area (Lightcast 2024)'</span>,</span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>{<span class="st">'Count'</span>: <span class="st">'Number of Job Postings'</span>, <span class="st">'Career Area'</span>: <span class="st">''</span>},</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'Count'</span>,</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>    color_continuous_scale<span class="op">=</span><span class="st">'Blues'</span>,</span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span><span class="st">'plotly_white'</span>,</span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">400</span></span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>save_fig(fig4, <span class="st">'antara_career_area'</span>)</span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a>fig4.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saved antara_career_area.png</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+</section>
+<section id="lightcast-occupation-group" class="level2">
+<h2 class="anchored" data-anchor-id="lightcast-occupation-group">Lightcast Occupation Group</h2>
+<div id="cell-39" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>occ_counts <span class="op">=</span> lc_occ[<span class="st">'LOT_V6_OCCUPATION_GROUP_NAME'</span>].value_counts().reset_index()</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>occ_counts.columns <span class="op">=</span> [<span class="st">'Occupation Group'</span>, <span class="st">'Count'</span>]</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>fig5 <span class="op">=</span> px.bar(</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    occ_counts,</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Count'</span>,</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'Occupation Group'</span>,</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>    orientation<span class="op">=</span><span class="st">'h'</span>,</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Job Postings by Occupation Group (Lightcast 2024)'</span>,</span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>{<span class="st">'Count'</span>: <span class="st">'Number of Job Postings'</span>, <span class="st">'Occupation Group'</span>: <span class="st">''</span>},</span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'Count'</span>,</span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>    color_continuous_scale<span class="op">=</span><span class="st">'Reds'</span>,</span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span><span class="st">'plotly_white'</span>,</span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">450</span></span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a>save_fig(fig5, <span class="st">'antara_occupation_group'</span>)</span>
+<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a>fig5.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saved antara_occupation_group.png</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
